@@ -1,0 +1,5 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(367,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+          1 file(s) copied.
+  ClockTest.cpp
+c:\users\ryan\desktop\c++ projects\gameengine\projectfiles\enginetester\clocktest.cpp(34): warning C4018: '<': signed/unsigned mismatch
+  EngineTester.vcxproj -> C:\Users\Ryan\Desktop\C++ Projects\GameEngine\ProjectFiles\EngineTester\x64\Debug\EngineTester.exe
