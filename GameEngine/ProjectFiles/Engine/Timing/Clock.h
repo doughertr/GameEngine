@@ -6,14 +6,14 @@ namespace Timing
 	class __declspec(dllexport) Clock
 	{
 		LARGE_INTEGER timeFrequency;
-		LARGE_INTEGER timeLastFrame;
+		LARGE_INTEGER lastFrameTimeMillisec;
 		LARGE_INTEGER deltaLastFrame;
-		float deltaTime;
+		float deltaTimeSeconds;
 	public:
 		bool init();
 		bool shutdown();
 		void newFrame();
-		float timeElapsedLastFrame() const;
+		float deltaTime() const;
 	};
 }
 #endif 

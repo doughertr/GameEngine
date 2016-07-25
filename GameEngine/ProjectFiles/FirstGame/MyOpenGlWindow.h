@@ -12,10 +12,10 @@ class MyOpenGlWindow : public QGLWidget
 protected:
 	void initializeGL();
 	void paintGL();
-	
 private slots:
 	void updateGame();
-
+	void updateVelocity();
+	void updatePosition();
 public:
 	bool init();
 	bool shutdown();

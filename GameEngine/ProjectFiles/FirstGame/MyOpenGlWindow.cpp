@@ -1,6 +1,7 @@
 #include <gl\glew.h>
 #include "MyOpenGlWindow.h"
 #include <cassert>
+#include <QtGui\QKeyEvent>
 #include <Math\vector2.h>
 #include <Timing\Clock.h>
 using Math::Vector2;
@@ -13,13 +14,14 @@ namespace {
 		Vector2(+0.1f ,  -0.1f),
 	};
 	const unsigned int NUM_VERTS = sizeof(verticies) / sizeof(*verticies);
-	Vector2 shipPosition(0.0f, 0.0f);
+	Vector2 shipPosition;
+	Vector2 shipVelocity;
 	Clock frameClock;
 }
 
 bool MyOpenGlWindow::init() 
 {
-	assert(frameClock.init());
+	return frameClock.init();
 
 }
 void MyOpenGlWindow::initializeGL()
@@ -37,6 +39,7 @@ void MyOpenGlWindow::initializeGL()
 }
 void MyOpenGlWindow::paintGL() 
 {
+	glViewport(0, 0, width(), height());
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
@@ -54,12 +57,31 @@ void MyOpenGlWindow::paintGL()
 
 void MyOpenGlWindow::updateGame()
 {
-	Vector2 velocity(0.001f, 0.001f);
-	shipPosition = shipPosition + velocity;
+	frameClock.newFrame();
+	updateVelocity();
+	updatePosition();
 	repaint();
 }
 
 bool MyOpenGlWindow::shutdown()
 {
 	return frameClock.shutdown();
+}
+void MyOpenGlWindow::updatePosition()
+{
+	shipPosition = shipPosition + shipVelocity * frameClock.deltaTime();
+}
+void MyOpenGlWindow::updateVelocity()
+{
+	const float ACCELERATION = 0.5f * frameClock.deltaTime();
+	if(GetAsyncKeyState(0x57)) //W key
+		shipVelocity.y += ACCELERATION;
+	if (GetAsyncKeyState(0x41)) //A key
+		shipVelocity.x -= ACCELERATION;
+	if (GetAsyncKeyState(0x53)) //S key
+		shipVelocity.y -= ACCELERATION;
+	if (GetAsyncKeyState(0x44)) //D key
+		shipVelocity.x += ACCELERATION;
+
+
 }

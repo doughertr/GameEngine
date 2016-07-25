@@ -22,7 +22,8 @@ int main(int argc, char* argv[])
 
 	QApplication application(argc, argv);
 	MyOpenGlWindow GlWindow;
-	GlWindow.init();
+	if (!GlWindow.init())
+		return -1;
 	GlWindow.show();
 	int errorCode = application.exec();
 	if (!GlWindow.shutdown())

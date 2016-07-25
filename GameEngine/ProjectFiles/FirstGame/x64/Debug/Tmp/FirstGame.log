@@ -1,3 +1,13 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(367,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+          1 file(s) copied.
   MyOpenGlWindow.cpp
-  FirstGame.vcxproj -> C:\Users\Ryan\Desktop\C++ Projects\GameEngine\ProjectFiles\FirstGame\x64\Debug\FirstGame.exe
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(21): error C2059: syntax error: 'const'
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(22): error C2143: syntax error: missing ';' before '{'
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(22): error C2447: '{': missing function header (old-style formal list?)
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(26): error C2801: 'Math::operator =' must be a non-static member
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(30): error C2805: binary 'operator +=' has too few parameters
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(34): error C2805: binary 'operator -=' has too few parameters
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(38): error C2803: 'operator *=' must have at least one formal parameter of class type
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(38): error C2805: binary 'operator *=' has too few parameters
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(42): error C2803: 'operator /=' must have at least one formal parameter of class type
+c:\users\ryanshomepc\desktop\c++ projects\ryansengine\gameengine\projectfiles\engine\math\vector2.inl(42): error C2805: binary 'operator /=' has too few parameters

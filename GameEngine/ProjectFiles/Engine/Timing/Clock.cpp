@@ -3,7 +3,7 @@ namespace Timing
 {
 	bool Clock::init()
 	{
-		return QueryPerformanceFrequency(&timeFrequency) && QueryPerformanceCounter(&timeLastFrame);
+		return QueryPerformanceFrequency(&timeFrequency) && QueryPerformanceCounter(&lastFrameTimeMillisec);
 	}
 	bool  Clock::shutdown()
 	{
@@ -11,15 +11,15 @@ namespace Timing
 	}
 	void  Clock::newFrame()
 	{
-		LARGE_INTEGER thisTime;
-		QueryPerformanceCounter(&thisTime);
-		LARGE_INTEGER delta;
-		delta.QuadPart = thisTime.QuadPart - timeLastFrame.QuadPart;
-		deltaTime = ((float)delta.QuadPart) / timeFrequency.QuadPart;
-		timeLastFrame.QuadPart = thisTime.QuadPart;
+		LARGE_INTEGER thisTimeMillisec;
+		QueryPerformanceCounter(&thisTimeMillisec);
+		LARGE_INTEGER deltaTimeMillisec;
+		deltaTimeMillisec.QuadPart = thisTimeMillisec.QuadPart - lastFrameTimeMillisec.QuadPart;
+		deltaTimeSeconds = ((float)deltaTimeMillisec.QuadPart) / timeFrequency.QuadPart; //converting milliseconds to float seconds
+		lastFrameTimeMillisec.QuadPart = thisTimeMillisec.QuadPart; //setting last frames milliseconds elapsed to this frames milliseconds elapsed
 	}
-	float  Clock::timeElapsedLastFrame() const
+	float  Clock::deltaTime() const
 	{
-		return deltaTime;
+		return deltaTimeSeconds;
 	}
 }
