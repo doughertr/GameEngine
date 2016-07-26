@@ -13,20 +13,14 @@ Matrix2::Matrix2(const Matrix2& source)
 	this->members[0] = source.members[0];
 	this->members[1] = source.members[1];
 }
-Vector2 operator*(const Matrix2 left, const Vector2 right)
-{
-	return Vector2();
-}
-
 Vector2 & Matrix2::operator[](int index)
 {
-	if (index >= 0 && index <= 1)
-	{
-		return members[index];
-	}
-	else {
-		return members[index % 2];
-	}
-		
-
+	return this->members[index];
 }
+
+
+Vector2 operator*(Matrix2& matrix, Vector2& vector)
+{
+	return (vector[0] * matrix[0]) + (vector[1] * matrix[1]);
+}
+
