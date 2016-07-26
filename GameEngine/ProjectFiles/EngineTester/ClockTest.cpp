@@ -20,12 +20,12 @@ TEST(Clock, FrameTimeMeasurement)
 	Sleep(1000);
 
 	clock.newFrame();
-	float deltaTime = clock.timeElapsedLastFrame();
+	float deltaTime = clock.deltaTime();
 	EXPECT_TRUE(deltaTime > 0.9f && deltaTime < 1.1f);
 	clock.newFrame();
 
 	Sleep(500);
-	deltaTime = clock.timeElapsedLastFrame();
+	deltaTime = clock.deltaTime();
 	EXPECT_TRUE(0.4f > deltaTime && deltaTime < 0.6f);
 
 	//random tests
@@ -41,11 +41,11 @@ TEST(Clock, FrameTimeMeasurement)
 		Sleep(testMilliseconds);
 		clock.newFrame();
 
-		float elapsedSeconds = clock.timeElapsedLastFrame();
+		float elapsedSeconds = clock.deltaTime();
 		EXPECT_NEAR(elapsedSeconds, testSeconds, THRESHOLD);
 	}
 
 	clock.newFrame();
-	clock.timeElapsedLastFrame();
+	clock.deltaTime();
 	EXPECT_TRUE(clock.shutdown());
 }

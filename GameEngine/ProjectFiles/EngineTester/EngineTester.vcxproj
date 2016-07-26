@@ -22,6 +22,7 @@
     <ClCompile Include="..\Middleware\googletest\src\gtest-all.cc" />
     <ClCompile Include="ClockTest.cpp" />
     <ClCompile Include="MainTester.cpp" />
+    <ClCompile Include="Matrix2Test.cpp" />
     <ClCompile Include="Vector2Test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

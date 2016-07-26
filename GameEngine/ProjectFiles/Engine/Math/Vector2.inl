@@ -18,27 +18,53 @@ float operator*(const Vector2 &vec1, const Vector2 &vec2)
 {
 	return (vec1.x*vec2.x) + (vec1.y*vec2.y);
 }
-Vector2(const Vector2 &source)
+Vector2::Vector2(const Vector2& source)
 {
-	return Vector2();
+	this->x = source.x;
+	this->y = source.y;
 }
-Vector2& operator=(const Vector2 &vec1)
+Vector2& Vector2::operator=(const Vector2 &vec1)
 {
-	return Vector2();
+	this->x = vec1.x;
+	this->y = vec1.y;
+	return *this;
 }
-Vector2& operator+=(const Vector2 &vec1)
+Vector2& Vector2::operator+=(const Vector2 &vec1)
 {
-	return Vector2();
+	this->x = this->x + vec1.x;
+	this->y = this->y + vec1.y;
+	return *this;
 }
-Vector2& operator-=(const Vector2 &vec1)
+Vector2& Vector2::operator-=(const Vector2 &vec1)
 {
-	return Vector2();
+	this->x = this->x - vec1.x;
+	this->y = this->y - vec1.y;
+	return *this;
 }
-Vector2& operator*=(float scalar)
+Vector2& Vector2::operator*=(float scalar)
 {
-	return Vector2();
+	this->x = this->x * scalar;
+	this->y = this->y * scalar;
+	return *this;
 }
-Vector2& operator/=(float scalar)
+Vector2& Vector2::operator/=(float scalar)
 {
-	return Vector2();
+	this->x = this->x / scalar;
+	this->y = this->y / scalar;
+	return *this;
+}
+float & Vector2::operator[](int index)
+{
+	switch (index)
+	{
+	case 0:
+		return this->x;
+		break;
+	case 1:
+		return this->y;
+		break;
+	default:
+		throw std::out_of_range ("2D Vector can only have two coordinates");
+		break;
+	}
 }

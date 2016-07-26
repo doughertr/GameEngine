@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Timing\Clock.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Math\Matrix2.inl" />
     <None Include="Math\Vector2.inl" />
   </ItemGroup>
   <ItemGroup>

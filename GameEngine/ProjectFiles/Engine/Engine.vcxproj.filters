@@ -11,9 +11,11 @@
   <ItemGroup>
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Timing\Clock.h" />
+    <ClInclude Include="Math\Matrix2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\Vector2.inl" />
+    <None Include="Math\Matrix2.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timing\Clock.cpp" />

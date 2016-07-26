@@ -69,7 +69,7 @@ bool MyOpenGlWindow::shutdown()
 }
 void MyOpenGlWindow::updatePosition()
 {
-	shipPosition = shipPosition + shipVelocity * frameClock.deltaTime();
+	shipPosition += shipVelocity * frameClock.deltaTime();
 }
 void MyOpenGlWindow::updateVelocity()
 {
