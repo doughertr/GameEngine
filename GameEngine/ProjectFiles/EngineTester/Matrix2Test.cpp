@@ -4,7 +4,7 @@
 using Math::Matrix2;
 using Math::Vector2;
 
-TEST(Matrix2, Constructor)
+TEST(Matrix2, MatrixConstructor)
 {
 	Matrix2 indentityMatrix;
 	EXPECT_FLOAT_EQ(indentityMatrix.members[0].x, 1.0f);
@@ -19,7 +19,7 @@ TEST(Matrix2, Constructor)
 	EXPECT_FLOAT_EQ(otherMatrix.members[1].x, 3.0f);
 	EXPECT_FLOAT_EQ(otherMatrix.members[1].y, 6.0f);
 }
-TEST(Matrix2, ConstructorCopy)
+TEST(Matrix2, MatrixConstructorCopy)
 {
 	Matrix2 indentityMatrix;
 	Matrix2 copiedMatrix(indentityMatrix);
@@ -37,7 +37,7 @@ TEST(Matrix2, ConstructorCopy)
 	EXPECT_FLOAT_EQ(otherMatrix.members[1].x, otherCopy.members[1].x);
 	EXPECT_FLOAT_EQ(otherMatrix.members[1].y, otherCopy.members[1].y);
 }
-TEST(Matrix2, Multiplication)
+TEST(Matrix2, MatrixAndVectorMultiplication)
 {
 	Matrix2 mat1(2, -3,
 			     4, -5);
@@ -53,4 +53,60 @@ TEST(Matrix2, MatrixIndexing)
 	EXPECT_FLOAT_EQ(indentityMatrix[0][1], 0.0f);
 	EXPECT_FLOAT_EQ(indentityMatrix[1][0], 0.0f);
 	EXPECT_FLOAT_EQ(indentityMatrix[1][1], 1.0f);
+}
+TEST(Matrix2, MatrixRotation)
+{
+	const float PI = 3.14159265359f;
+	Matrix2 op = Matrix2::rotate(0.0f);
+
+	EXPECT_FLOAT_EQ(op[0][0],  1.0f);
+	EXPECT_FLOAT_EQ(op[0][1],  0.0f);
+	EXPECT_FLOAT_EQ(op[1][0],  0.0f);
+	EXPECT_FLOAT_EQ(op[1][1],  1.0f);
+
+	//=====================================
+	//NOTE: PI and PI/2 Tests were having 
+	//trouble with float equals, returning
+	//values very close but not equal to 
+	//zero (becuase of floating point error)
+	//Added very small threashold instead
+	//=====================================
+	
+	op = Matrix2::rotate(PI);
+	EXPECT_NEAR(op[0][0], -1.0f, 0.00001f);
+	EXPECT_NEAR(op[0][1],  0.0f, 0.00001f);
+	EXPECT_NEAR(op[1][0],  0.0f, 0.00001f);
+	EXPECT_NEAR(op[1][1], -1.0f, 0.00001f);
+									
+	op = Matrix2::rotate(PI/2);		
+	EXPECT_NEAR(op[0][0],  0.0f, 0.00001f);
+	EXPECT_NEAR(op[0][1],  1.0f, 0.00001f);
+	EXPECT_NEAR(op[1][0], -1.0f, 0.00001f);
+	EXPECT_NEAR(op[1][1],  0.0f, 0.00001f);
+
+	//=====================================
+
+	op = Matrix2::rotate(PI/4);
+	EXPECT_FLOAT_EQ(op[0][0],  sqrt(2.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[0][1],  sqrt(2.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][0], -sqrt(2.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][1],  sqrt(2.0f) / 2.0f);
+
+	op = Matrix2::rotate(-PI/4);
+	EXPECT_FLOAT_EQ(op[0][0],  sqrt(2.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[0][1], -sqrt(2.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][0],  sqrt(2.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][1],  sqrt(2.0f) / 2.0f);
+
+	op = Matrix2::rotate(PI/3);
+	EXPECT_FLOAT_EQ(op[0][0],  1.0f / 2.0f);
+	EXPECT_FLOAT_EQ(op[0][1],  sqrt(3.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][0], -sqrt(3.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][1],  1.0f / 2.0f);
+
+	op = Matrix2::rotate(-PI/6);
+	EXPECT_FLOAT_EQ(op[0][0],  sqrt(3.0f) / 2.0f);
+	EXPECT_FLOAT_EQ(op[0][1], -1.0f / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][0],  1.0f / 2.0f);
+	EXPECT_FLOAT_EQ(op[1][1],  sqrt(3.0f) / 2.0f);
 }

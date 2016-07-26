@@ -17,10 +17,21 @@ Vector2 & Matrix2::operator[](int index)
 {
 	return this->members[index];
 }
-
-
+Vector2 Matrix2::operator[](int index) const
+{
+	return this->members[index];
+}
+Matrix2 Matrix2::rotate(float radians)
+{
+	Matrix2 rotatedMatrix;
+	rotatedMatrix.members[0].x =  cos(radians);
+	rotatedMatrix.members[0].y =  sin(radians);
+	rotatedMatrix.members[1].x = -sin(radians);
+	rotatedMatrix.members[1].y =  cos(radians);
+	return rotatedMatrix;
+}
+//non member functions
 Vector2 operator*(Matrix2& matrix, Vector2& vector)
 {
 	return (vector[0] * matrix[0]) + (vector[1] * matrix[1]);
 }
-
