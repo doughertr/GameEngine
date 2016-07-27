@@ -1,5 +1,6 @@
-#VS open database files
+#other
 *.opendb
+*.sdf
 
 # Prerequisites
 *.d
