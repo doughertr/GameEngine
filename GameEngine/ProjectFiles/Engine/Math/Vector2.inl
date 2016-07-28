@@ -68,3 +68,19 @@ float & Vector2::operator[](int index)
 		break;
 	}
 }
+
+float Vector2::operator[](int index) const
+{
+	switch (index)
+	{
+	case 0:
+		return this->x;
+		break;
+	case 1:
+		return this->y;
+		break;
+	default:
+		throw std::out_of_range("2D Vector can only have two coordinates");
+		break;
+	}
+}
