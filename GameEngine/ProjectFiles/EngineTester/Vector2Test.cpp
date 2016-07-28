@@ -1,7 +1,8 @@
 #include <gtest\gtest.h>
 #include <Math\Vector2.h>
 using Math::Vector2;
-
+#ifndef RANDOM_FLOAT_FUNC
+#define RANDOM_FLOAT_FUNC
 float RandomFloat(float min, float max)
 {
 	// this  function assumes max > min, you may want 
@@ -14,6 +15,7 @@ float RandomFloat(float min, float max)
 	float range = max - min;
 	return (random*range) + min;
 };
+#endif
 
 TEST(Vector2, Constructor)
 {

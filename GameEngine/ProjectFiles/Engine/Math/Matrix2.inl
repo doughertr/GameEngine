@@ -8,11 +8,6 @@ Matrix2::Matrix2(float matrix[2][2])
 	members[0] = Vector2(matrix[0][0], matrix[1][0]);
 	members[1] = Vector2(matrix[0][1], matrix[1][1]);
 }
-Matrix2::Matrix2(const Matrix2& source)
-{
-	this->members[0] = source.members[0];
-	this->members[1] = source.members[1];
-}
 Vector2 & Matrix2::operator[](int index)
 {
 	return this->members[index];
@@ -23,15 +18,18 @@ Vector2 Matrix2::operator[](int index) const
 }
 Matrix2 Matrix2::rotate(float radians)
 {
-	Matrix2 rotatedMatrix;
-	rotatedMatrix.members[0].x =  cos(radians);
-	rotatedMatrix.members[0].y =  sin(radians);
-	rotatedMatrix.members[1].x = -sin(radians);
-	rotatedMatrix.members[1].y =  cos(radians);
-	return rotatedMatrix;
+	float cosResult = cos(radians);
+	float sinResult = sin(radians);
+
+	return Matrix2(cosResult, -sinResult,
+				   sinResult,  cosResult);
 }
 //non member functions
-Vector2 operator*(Matrix2& matrix, Vector2& vector)
+Vector2 operator*(const Matrix2& matrix, const Vector2& vector)
 {
-	return (vector[0] * matrix[0]) + (vector[1] * matrix[1]);
+	return Vector2(vector[0] * matrix[0] + vector[1] * matrix[1]);
+}
+std::ostream& operator<<(std::ostream& os, const Matrix2& matrix) 
+{
+	return os;
 }

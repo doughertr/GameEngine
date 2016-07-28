@@ -1,34 +1,3 @@
-Vector2 operator+(const Vector2 &vec1, const Vector2 &vec2)
-{
-	return Vector2(vec1.x + vec2.x, vec1.y + vec2.y);
-}
-Vector2 operator-(const Vector2 &vec1, const Vector2 &vec2)
-{
-	return Vector2(vec1.x - vec2.x, vec1.y - vec2.y);
-}
-Vector2 operator*(float scalar, const Vector2 &vec2)
-{
-	return Vector2(vec2.x * scalar, vec2.y * scalar);
-}
-Vector2 operator*(const Vector2 &vec2, float scalar)
-{
-	return scalar * vec2;
-}
-float operator*(const Vector2 &vec1, const Vector2 &vec2)
-{
-	return (vec1.x*vec2.x) + (vec1.y*vec2.y);
-}
-Vector2::Vector2(const Vector2& source)
-{
-	this->x = source.x;
-	this->y = source.y;
-}
-Vector2& Vector2::operator=(const Vector2 &vec1)
-{
-	this->x = vec1.x;
-	this->y = vec1.y;
-	return *this;
-}
 Vector2& Vector2::operator+=(const Vector2 &vec1)
 {
 	this->x = this->x + vec1.x;
@@ -83,4 +52,30 @@ float Vector2::operator[](int index) const
 		throw std::out_of_range("2D Vector can only have two coordinates");
 		break;
 	}
+}
+//non member functions
+Vector2 operator+(const Vector2 &vec1, const Vector2 &vec2)
+{
+	return Vector2(vec1.x + vec2.x, vec1.y + vec2.y);
+}
+Vector2 operator-(const Vector2 &vec1, const Vector2 &vec2)
+{
+	return Vector2(vec1.x - vec2.x, vec1.y - vec2.y);
+}
+Vector2 operator*(float scalar, const Vector2 &vec2)
+{
+	return Vector2(vec2.x * scalar, vec2.y * scalar);
+}
+Vector2 operator*(const Vector2 &vec2, float scalar)
+{
+	return scalar * vec2;
+}
+float operator*(const Vector2 &vec1, const Vector2 &vec2)
+{
+	return (vec1.x*vec2.x) + (vec1.y*vec2.y);
+}
+std::ostream& operator<<(std::ostream& os, const Vector2& vector)
+{
+	os << "<" << vector.x << ", " << vector.y << ">";
+	return os;
 }

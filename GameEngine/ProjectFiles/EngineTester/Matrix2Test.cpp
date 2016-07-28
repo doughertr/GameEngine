@@ -4,6 +4,8 @@
 using Math::Matrix2;
 using Math::Vector2;
 
+float RandomFloat(float min, float max);
+
 TEST(Matrix2, MatrixConstructor)
 {
 	Matrix2 indentityMatrix;
@@ -19,32 +21,51 @@ TEST(Matrix2, MatrixConstructor)
 	EXPECT_FLOAT_EQ(otherMatrix.members[1].x, 3.0f);
 	EXPECT_FLOAT_EQ(otherMatrix.members[1].y, 6.0f);
 }
-TEST(Matrix2, MatrixConstructorCopy)
-{
-	Matrix2 indentityMatrix;
-	Matrix2 copiedMatrix(indentityMatrix);
-
-	EXPECT_FLOAT_EQ(indentityMatrix.members[0].x, copiedMatrix.members[0].x);
-	EXPECT_FLOAT_EQ(indentityMatrix.members[0].y, copiedMatrix.members[0].y);
-	EXPECT_FLOAT_EQ(indentityMatrix.members[1].x, copiedMatrix.members[1].x);
-	EXPECT_FLOAT_EQ(indentityMatrix.members[1].y, copiedMatrix.members[1].y);
-
-	Matrix2 otherMatrix(10.0f, 7.3f, 2.0f, 9.2f);
-	Matrix2 otherCopy(otherMatrix);
-
-	EXPECT_FLOAT_EQ(otherMatrix.members[0].x, otherCopy.members[0].x);
-	EXPECT_FLOAT_EQ(otherMatrix.members[0].y, otherCopy.members[0].y);
-	EXPECT_FLOAT_EQ(otherMatrix.members[1].x, otherCopy.members[1].x);
-	EXPECT_FLOAT_EQ(otherMatrix.members[1].y, otherCopy.members[1].y);
-}
 TEST(Matrix2, MatrixAndVectorMultiplication)
 {
-	Matrix2 mat1(2, -3,
-			     4, -5);
-	Vector2 vec1(3, 9);
-	Vector2 result = mat1 * vec1;
+	const Matrix2 testMatrix(2, -3,
+			                 4, -5);
+	const Vector2 testVector(3, 9);
+
+	Matrix2 originalMat(testMatrix);
+	Vector2 originalVec(testVector);
+
+	Vector2 result = testMatrix * testVector;
 	EXPECT_FLOAT_EQ(result.x, -21.0f);
 	EXPECT_FLOAT_EQ(result.y, -33.0f);
+
+	EXPECT_FLOAT_EQ(originalMat[0][0], testMatrix[0][0]);
+	EXPECT_FLOAT_EQ(originalMat[0][1], testMatrix[0][1]);
+	EXPECT_FLOAT_EQ(originalMat[1][0], testMatrix[1][0]);
+	EXPECT_FLOAT_EQ(originalMat[1][1], testMatrix[1][1]);
+
+	const unsigned int NUM_TESTS = 10;
+	const float MIN = -1000.0f;
+	const float MAX = 1000.0f;
+
+	float row0col0, row0col1, row1col0, row1col1, vectorX, vectorY;
+	Matrix2 test2Matrix;
+	Vector2 test2Vector;
+	Vector2 testResult;
+	for (unsigned int i = 1; i <= NUM_TESTS; i++)
+	{
+		row0col0 = RandomFloat(MIN, MAX);
+		row0col1 = RandomFloat(MIN, MAX);
+		row1col0 = RandomFloat(MIN, MAX);
+		row1col1 = RandomFloat(MIN, MAX);
+
+		vectorX = RandomFloat(MIN, MAX);
+		vectorY = RandomFloat(MIN, MAX);
+
+		test2Matrix = Matrix2(row0col0, row0col1,
+							  row1col0, row1col1);
+		test2Vector = Vector2(vectorX, vectorY);
+		
+		testResult = test2Matrix * test2Vector;
+		EXPECT_FLOAT_EQ(testResult.x, row0col0*vectorX + row0col1*vectorY);
+		EXPECT_FLOAT_EQ(testResult.y, row1col0*vectorX + row1col1*vectorY);
+		std::cout << "Test number " << i << " sucessful. Result: " << testResult << std::endl;
+	}
 }
 TEST(Matrix2, MatrixIndexing)
 {

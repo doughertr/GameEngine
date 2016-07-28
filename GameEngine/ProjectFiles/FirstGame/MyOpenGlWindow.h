@@ -16,6 +16,7 @@ private slots:
 	void updateGame();
 	void updateVelocity();
 	void updatePosition();
+	void updateRotation();
 public:
 	bool init();
 	bool shutdown();

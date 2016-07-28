@@ -19,13 +19,14 @@ namespace Math
 
 		explicit inline Matrix2(float r0c0 = 1.0f, float r0c1 = 0.0f, float r1c0 = 0.0f, float r1c1 = 1.0f);
 		inline Matrix2(float values[2][2]);
-		inline Matrix2(const Matrix2& source);
+
 		inline static Matrix2 rotate(float radians);
 		
-		inline Vector2 & operator[](int index);
+		inline Vector2& operator[](int index);
 		inline Vector2 operator[](int index) const;
 	};
-	inline Vector2 operator*(Matrix2& matrix, Vector2& vector);
+	inline Vector2 operator*(const Matrix2& matrix, const Vector2& vector);
+	inline std::ostream& operator<<(std::ostream& os, const Matrix2& matrix);
 	#include "Matrix2.inl"
 }
 
