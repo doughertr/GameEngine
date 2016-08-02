@@ -12,10 +12,14 @@
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Timing\Clock.h" />
     <ClInclude Include="Math\Matrix2.h" />
+    <ClInclude Include="Math\Matrix3.h" />
+    <ClInclude Include="Math\Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\Vector2.inl" />
     <None Include="Math\Matrix2.inl" />
+    <None Include="Math\Matrix3.inl" />
+    <None Include="Math\Vector3.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timing\Clock.cpp" />

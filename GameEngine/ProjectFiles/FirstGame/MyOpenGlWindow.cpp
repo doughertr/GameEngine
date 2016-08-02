@@ -12,13 +12,15 @@ using Timing::Clock;
 namespace {
 	static Vector2 verticies[] =
 	{
-		Vector2(+0.0f ,  +0.1f),
+		Vector2(+0.0f ,  sqrt(0.02f)),
 		Vector2(-0.1f ,  -0.1f),
 		Vector2(+0.1f ,  -0.1f),
 	};
 	const unsigned int NUM_VERTS = sizeof(verticies) / sizeof(*verticies);
 	Vector2 shipPosition;
 	Vector2 shipVelocity;
+	Vector2 shipAcceleration;
+	Matrix2 shipMatrix;
 	float shipOrientation = 0.0f;
 	Clock frameClock;
 }
@@ -51,11 +53,11 @@ void MyOpenGlWindow::paintGL()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	Matrix2 op = Matrix2::rotate(shipOrientation);
+	shipMatrix = Matrix2::rotate(shipOrientation);
 	Vector2 transformedVerts[NUM_VERTS];
 	for (unsigned int i = 0; i < NUM_VERTS; i++)
 	{
-		transformedVerts[i] = op * verticies[i];
+		transformedVerts[i] = shipMatrix * verticies[i];
 		transformedVerts[i] += shipPosition;
 	}
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(transformedVerts), transformedVerts);
@@ -92,13 +94,15 @@ void MyOpenGlWindow::updateRotation()
 }
 void MyOpenGlWindow::updateVelocity()
 {
-	const float ACCELERATION = 0.5f * frameClock.deltaTime();
-	if(GetAsyncKeyState(0x57)) //W key
-		shipVelocity.y += ACCELERATION;
-	if (GetAsyncKeyState(0x41)) //A key
-		shipVelocity.x -= ACCELERATION;
-	if (GetAsyncKeyState(0x53)) //S key
-		shipVelocity.y -= ACCELERATION;
-	if (GetAsyncKeyState(0x44)) //D key
-		shipVelocity.x += ACCELERATION;
+	const float ACCELERATION_MAGNETUDE = 0.5f * frameClock.deltaTime();
+	//if(GetAsyncKeyState(0x57)) //W key
+	//	shipVelocity += ACCELERATION_MAGNETUDE * shipMatrix[];
+	//if (GetAsyncKeyState(0x41)) //A key
+	//	shipVelocity -= ACCELERATION_MAGNETUDE;
+	//if (GetAsyncKeyState(0x53)) //S key
+	//	shipVelocity -= ACCELERATION_MAGNETUDE;
+	//if (GetAsyncKeyState(0x44)) //D key
+	//	shipVelocity += ACCELERATION_MAGNETUDE;
+	if (GetAsyncKeyState(VK_SPACE))
+		shipVelocity += ACCELERATION_MAGNETUDE * shipMatrix[1];
 }

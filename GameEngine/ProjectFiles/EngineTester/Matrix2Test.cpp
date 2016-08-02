@@ -9,17 +9,37 @@ float RandomFloat(float min, float max);
 TEST(Matrix2, MatrixConstructor)
 {
 	Matrix2 indentityMatrix;
-	EXPECT_FLOAT_EQ(indentityMatrix.members[0].x, 1.0f);
-	EXPECT_FLOAT_EQ(indentityMatrix.members[0].y, 0.0f);
-	EXPECT_FLOAT_EQ(indentityMatrix.members[1].x, 0.0f);
-	EXPECT_FLOAT_EQ(indentityMatrix.members[1].y, 1.0f);
+	EXPECT_FLOAT_EQ(indentityMatrix.basisVector0.x, 1.0f);
+	EXPECT_FLOAT_EQ(indentityMatrix.basisVector0.y, 0.0f);
+	EXPECT_FLOAT_EQ(indentityMatrix.basisVector1.x, 0.0f);
+	EXPECT_FLOAT_EQ(indentityMatrix.basisVector1.y, 1.0f);
 
 	Matrix2 otherMatrix(9.0f, 3.0f, 1.0f, 6.0f);
 
-	EXPECT_FLOAT_EQ(otherMatrix.members[0].x, 9.0f);
-	EXPECT_FLOAT_EQ(otherMatrix.members[0].y, 1.0f);
-	EXPECT_FLOAT_EQ(otherMatrix.members[1].x, 3.0f);
-	EXPECT_FLOAT_EQ(otherMatrix.members[1].y, 6.0f);
+	EXPECT_FLOAT_EQ(otherMatrix.basisVector0.x, 9.0f);
+	EXPECT_FLOAT_EQ(otherMatrix.basisVector0.y, 1.0f);
+	EXPECT_FLOAT_EQ(otherMatrix.basisVector1.x, 3.0f);
+	EXPECT_FLOAT_EQ(otherMatrix.basisVector1.y, 6.0f);
+}
+TEST(Matrix2, MatrixArrayConstructor)
+{
+	float testArray1[2][2] =  { {9.2f, 9.9f},
+								{4.6f, 1.0f} };
+	Matrix2 testMatrix1(testArray1);
+
+	EXPECT_FLOAT_EQ(testMatrix1.basisVector0.x, 9.2f);
+	EXPECT_FLOAT_EQ(testMatrix1.basisVector0.y, 4.6f);
+	EXPECT_FLOAT_EQ(testMatrix1.basisVector1.x, 9.9f);
+	EXPECT_FLOAT_EQ(testMatrix1.basisVector1.y, 1.0f);
+
+	float testArray2[2][2] = { { 0.0f, 10.1f },
+							   {-5.3f,-99.8f } };
+	Matrix2 testMatrix2(testArray2);
+
+	EXPECT_FLOAT_EQ(testMatrix2.basisVector0.x, 0.0f);
+	EXPECT_FLOAT_EQ(testMatrix2.basisVector0.y, -5.3f);
+	EXPECT_FLOAT_EQ(testMatrix2.basisVector1.x, 10.1f);
+	EXPECT_FLOAT_EQ(testMatrix2.basisVector1.y, -99.8f);
 }
 TEST(Matrix2, MatrixAndVectorMultiplication)
 {

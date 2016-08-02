@@ -1,13 +1,13 @@
-Vector2& Vector2::operator+=(const Vector2 &vec1)
+Vector2& Vector2::operator+=(const Vector2 &vec)
 {
-	this->x = this->x + vec1.x;
-	this->y = this->y + vec1.y;
+	this->x = this->x + vec.x;
+	this->y = this->y + vec.y;
 	return *this;
 }
-Vector2& Vector2::operator-=(const Vector2 &vec1)
+Vector2& Vector2::operator-=(const Vector2 &vec)
 {
-	this->x = this->x - vec1.x;
-	this->y = this->y - vec1.y;
+	this->x = this->x - vec.x;
+	this->y = this->y - vec.y;
 	return *this;
 }
 Vector2& Vector2::operator*=(float scalar)
