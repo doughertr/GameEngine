@@ -27,6 +27,9 @@
     <ClCompile Include="Vector2Test.cpp" />
     <ClCompile Include="Vector3Test.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HelperFunctions.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D461D874-4C08-4FEC-9270-6181162B448F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

@@ -1,10 +1,12 @@
 #include <gtest\gtest.h>
 #include <Math\Matrix3.h>
+#include <Math\Vector2.h>
 #include <Math\Vector3.h>
-using Math::Matrix3;
-using Math::Vector3;
+#include "HelperFunctions.h"
 
-float RandomFloat(float min, float max);
+using Math::Matrix3;
+using Math::Vector2;
+using Math::Vector3;
 
 TEST(Matrix3, MatrixConstructor)
 {
@@ -81,7 +83,7 @@ TEST(Matrix3, MatrixArrayConstructor)
 	EXPECT_FLOAT_EQ(testMat2.translationVector.z,-11.9f);
 
 }
-TEST(Matrix3, MatrixAndVectorMultiplication)
+TEST(Matrix3, MatrixVectorMultiplication)
 {
 	Matrix3 testMatrix(
 		1.0f, 3.0f, -1.0f,
@@ -151,6 +153,30 @@ TEST(Matrix3, MatrixAndVectorMultiplication)
 		std::cout << "Test number " << i << " sucessful. Result: " << testResult << std::endl;
 	}
 }
+TEST(Matrix3, MatrixMultiplication)
+{
+	Matrix3 mat1(
+	1.0f, -5.0f, 3.0f,
+	3.0f,-10.0f, 6.0f,
+	1.0f,  2.0f, 4.0f);
+	Matrix3 mat2(
+	1.0f, 2.0f, 3.0f,
+	4.0f, 5.0f, 6.0f,
+	7.0f, 8.0f, 9.0f);
+
+	Matrix3 result1 = mat2 * mat2;
+	EXPECT_FLOAT_EQ(result1[0][0], 30.0f);
+	EXPECT_FLOAT_EQ(result1[0][1], 66.0f);
+	EXPECT_FLOAT_EQ(result1[0][2], 102.0f);
+
+	EXPECT_FLOAT_EQ(result1[1][0], 36.0f);
+	EXPECT_FLOAT_EQ(result1[1][1], 81.0f);
+	EXPECT_FLOAT_EQ(result1[1][2], 126.0f);
+
+	EXPECT_FLOAT_EQ(result1[2][0], 42.0f);
+	EXPECT_FLOAT_EQ(result1[2][1], 96.0f);
+	EXPECT_FLOAT_EQ(result1[2][2], 150.0f);
+}
 TEST(Matrix3, MatrixIndexing)
 {
 	Matrix3 indentityMatrix;
@@ -166,10 +192,10 @@ TEST(Matrix3, MatrixIndexing)
 	EXPECT_FLOAT_EQ(indentityMatrix[2][1], 0.0f);
 	EXPECT_FLOAT_EQ(indentityMatrix[2][2], 1.0f);
 }
-TEST(Matrix3, MatrixRotation)
+TEST(Matrix3, MatrixZRotation)
 {
 	const float PI = 3.14159265359f;
-	Matrix3 op = Matrix3::rotate(0.0f);
+	Matrix3 op = Matrix3::rotateZ(0.0f);
 
 	EXPECT_FLOAT_EQ(op[0][0], 1.0f);
 	EXPECT_FLOAT_EQ(op[0][1], 0.0f);
@@ -192,7 +218,7 @@ TEST(Matrix3, MatrixRotation)
 	//Added very small threashold instead
 	//=====================================
 
-	op = Matrix3::rotate(PI);
+	op = Matrix3::rotateZ(PI);
 	EXPECT_NEAR(op[0][0], -1.0f, 0.00001f);
 	EXPECT_NEAR(op[0][1], 0.0f, 0.00001f);
 	EXPECT_FLOAT_EQ(op[0][2], 0.0f);
@@ -207,7 +233,7 @@ TEST(Matrix3, MatrixRotation)
 	EXPECT_FLOAT_EQ(op[2][2], 1.0f);
 
 
-	op = Matrix3::rotate(PI / 2);
+	op = Matrix3::rotateZ(PI / 2);
 	EXPECT_NEAR(op[0][0], 0.0f, 0.00001f);
 	EXPECT_NEAR(op[0][1], 1.0f, 0.00001f);
 	EXPECT_FLOAT_EQ(op[0][2], 0.0f);
@@ -224,7 +250,7 @@ TEST(Matrix3, MatrixRotation)
 
 	//=====================================
 
-	op = Matrix3::rotate(PI / 4);
+	op = Matrix3::rotateZ(PI / 4);
 	EXPECT_FLOAT_EQ(op[0][0], sqrt(2.0f) / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][1], sqrt(2.0f) / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][2], 0.0f);
@@ -239,7 +265,7 @@ TEST(Matrix3, MatrixRotation)
 	EXPECT_FLOAT_EQ(op[2][1], 0.0f);
 	EXPECT_FLOAT_EQ(op[2][2], 1.0f);
 
-	op = Matrix3::rotate(-PI / 4);
+	op = Matrix3::rotateZ(-PI / 4);
 	EXPECT_FLOAT_EQ(op[0][0], sqrt(2.0f) / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][1], -sqrt(2.0f) / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][2], 0.0f);
@@ -254,7 +280,7 @@ TEST(Matrix3, MatrixRotation)
 	EXPECT_FLOAT_EQ(op[2][1], 0.0f);
 	EXPECT_FLOAT_EQ(op[2][2], 1.0f);
 
-	op = Matrix3::rotate(PI / 3);
+	op = Matrix3::rotateZ(PI / 3);
 	EXPECT_FLOAT_EQ(op[0][0], 1.0f / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][1], sqrt(3.0f) / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][2], 0.0f);
@@ -269,7 +295,7 @@ TEST(Matrix3, MatrixRotation)
 	EXPECT_FLOAT_EQ(op[2][1], 0.0f);
 	EXPECT_FLOAT_EQ(op[2][2], 1.0f);
 
-	op = Matrix3::rotate(-PI / 6);
+	op = Matrix3::rotateZ(-PI / 6);
 	EXPECT_FLOAT_EQ(op[0][0], sqrt(3.0f) / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][1], -1.0f / 2.0f);
 	EXPECT_FLOAT_EQ(op[0][2], 0.0f);
@@ -282,4 +308,41 @@ TEST(Matrix3, MatrixRotation)
 	EXPECT_FLOAT_EQ(op[2][0], 0.0f);
 	EXPECT_FLOAT_EQ(op[2][1], 0.0f);
 	EXPECT_FLOAT_EQ(op[2][2], 1.0f);
+}
+TEST(Matrix3, MatrixPointTranslation)
+{
+	Matrix3 trans = Matrix3::translate(6.0f, 7.0f);
+	Vector3 vect(-5.0f, 2.0f, 1.0f);
+	Vector3 result = trans * vect;
+
+	EXPECT_FLOAT_EQ(result.x, 1.0f);
+	EXPECT_FLOAT_EQ(result.y, 9.0f);
+	EXPECT_FLOAT_EQ(result.z, 1.0f);
+
+	Matrix3 trans2 = Matrix3::translate(9.0f, -4.0f);
+	Vector3 vect2(-1.0f, -13.0f, 1.0f);
+	Vector3 result2 = trans2 * vect2;
+
+	EXPECT_FLOAT_EQ(result2.x, 8.0f);
+	EXPECT_FLOAT_EQ(result2.y, -17.0f);
+	EXPECT_FLOAT_EQ(result2.z, 1.0f);
+
+}
+TEST(Matrix3, MatrixVectorTranslation)
+{
+	Matrix3 trans = Matrix3::translate(Vector3(6.0f, 7.0f));
+	Vector3 vect(-5.0f, 2.0f, 1.0f);
+	Vector3 result = trans * vect;
+
+	EXPECT_FLOAT_EQ(result.x, 1.0f);
+	EXPECT_FLOAT_EQ(result.y, 9.0f);
+	EXPECT_FLOAT_EQ(result.z, 1.0f);
+
+	Matrix3 trans2 = Matrix3::translate(Vector3(9.0f, -4.0f));
+	Vector3 vect2(-1.0f, -13.0f, 1.0f);
+	Vector3 result2 = trans2 * vect2;
+
+	EXPECT_FLOAT_EQ(result2.x, 8.0f);
+	EXPECT_FLOAT_EQ(result2.y, -17.0f);
+	EXPECT_FLOAT_EQ(result2.z, 1.0f);
 }

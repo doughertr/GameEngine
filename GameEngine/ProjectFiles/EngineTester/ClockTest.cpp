@@ -29,7 +29,7 @@ TEST(Clock, FrameTimeMeasurement)
 	EXPECT_TRUE(0.4f > deltaTime && deltaTime < 0.6f);
 
 	//random tests
-	const int NUM_TESTS = 10 + rand() % 10;
+	const unsigned int NUM_TESTS = 10 + rand() % 10;
 	const float THRESHOLD = 0.01f;
 	for (unsigned int i = 0; i < NUM_TESTS; i++)
 	{

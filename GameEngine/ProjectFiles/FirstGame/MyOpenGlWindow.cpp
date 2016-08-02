@@ -2,25 +2,26 @@
 #include "MyOpenGlWindow.h"
 #include <cassert>
 #include <QtGui\QKeyEvent>
-#include <Math\Vector2.h>
-#include <Math\Matrix2.h>
+#include <Math\Vector3.h>
+#include <Math\Matrix3.h>
 #include <Timing\Clock.h>
-using Math::Vector2;
-using Math::Matrix2;
+using Math::Vector3;
+using Math::Matrix3;
+
 using Timing::Clock;
 
 namespace {
-	static Vector2 verticies[] =
+	static Vector3 verticies[] =
 	{
-		Vector2(+0.0f ,  sqrt(0.02f)),
-		Vector2(-0.1f ,  -0.1f),
-		Vector2(+0.1f ,  -0.1f),
+		Vector3(+0.0f ,  sqrt(0.02f), 1.0f),
+		Vector3(-0.1f ,  -0.1f,       1.0f),
+		Vector3(+0.1f ,  -0.1f,       1.0f),
 	};
 	const unsigned int NUM_VERTS = sizeof(verticies) / sizeof(*verticies);
-	Vector2 shipPosition;
-	Vector2 shipVelocity;
-	Vector2 shipAcceleration;
-	Matrix2 shipMatrix;
+	Vector3 shipPosition(0.0f, 0.0f, 1.0f);
+	Vector3 shipVelocity;
+	Vector3 shipAcceleration;
+	Matrix3 shipMatrix;
 	float shipOrientation = 0.0f;
 	Clock frameClock;
 }
@@ -46,19 +47,30 @@ void MyOpenGlWindow::initializeGL()
 void MyOpenGlWindow::paintGL() 
 {
 	int minSize = std::min(width(), height());
-	Vector2 viewportLocation;
+	Vector3 viewportLocation;
 	viewportLocation.x = width() / 2 - minSize / 2;
 	viewportLocation.y = height() / 2 - minSize / 2;
 	glViewport(viewportLocation.x, viewportLocation.y, minSize, minSize);
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	shipMatrix = Matrix2::rotate(shipOrientation);
-	Vector2 transformedVerts[NUM_VERTS];
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	Vector3 transformedVerts[NUM_VERTS];
+	Matrix3 translator = Matrix3::translate(shipPosition.x, shipPosition.y);
+	Matrix3 rotator = Matrix3::rotateZ(shipOrientation);
+	
+	shipMatrix = translator * rotator;
+
+	std::cout << "==================" << std::endl;
+	std::cout << "Translation Matrix" << translator << std::endl;
+	std::cout << "Rotation Matrix" << rotator << std::endl;
+	std::cout << "Ship's Matrix" << shipMatrix << std::endl;
+	std::cout << "==================" << std::endl;
+
 	for (unsigned int i = 0; i < NUM_VERTS; i++)
 	{
 		transformedVerts[i] = shipMatrix * verticies[i];
-		transformedVerts[i] += shipPosition;
 	}
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(transformedVerts), transformedVerts);
 

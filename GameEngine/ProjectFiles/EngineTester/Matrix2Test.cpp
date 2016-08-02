@@ -1,10 +1,9 @@
 #include <gtest\gtest.h>
 #include <Math\Matrix2.h>
 #include <Math\Vector2.h>
+#include "HelperFunctions.h"
 using Math::Matrix2;
 using Math::Vector2;
-
-float RandomFloat(float min, float max);
 
 TEST(Matrix2, MatrixConstructor)
 {

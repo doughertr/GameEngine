@@ -1,12 +1,12 @@
 #include <gtest\gtest.h>
 #include <Math\Vector3.h>
+#include "HelperFunctions.h"
+
 using Math::Vector3;
 #ifndef RANDOM_FLOAT_FUNC
 #define RANDOM_FLOAT_FUNC
 #endif
 const int NUM_TESTS = 10;
-
-float RandomFloat(float min, float max);
 
 
 TEST(Vector3, Constructor)
