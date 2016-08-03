@@ -82,14 +82,26 @@ Matrix3 Matrix3::rotateZ(float radians)
 //non member functions
 Vector3 operator*(const Matrix3& matrix, const Vector3& vector)
 {
-	return Vector3(vector[0] * matrix[0] + vector[1] * matrix[1] + vector[2] * matrix[2]);
+	return Vector3(
+		matrix[0][0] * vector.x + matrix[1][0] * vector.y + matrix[2][0] * vector.z,
+		matrix[0][1] * vector.x + matrix[1][1] * vector.y + matrix[2][1] * vector.z,
+		matrix[0][2] * vector.x + matrix[1][2] * vector.y + matrix[2][2] * vector.z
+	);
 }
 Matrix3 operator*(const Matrix3& left, const Matrix3& right)
 {
 	return Matrix3(
-		Vector3(left[0][0] * right[0] + left[0][1] * right[1] + left[0][2] * right[2]),
-		Vector3(left[1][0] * right[0] + left[1][1] * right[1] + left[1][2] * right[2]),
-		Vector3(left[2][0] * right[0] + left[2][1] * right[1] + left[2][2] * right[2]));
+		left[0][0] * right[0][0] + left[1][0] * right[0][1] + left[2][0] * right[0][2],
+		left[0][0] * right[1][0] + left[1][0] * right[1][1] + left[2][0] * right[1][2],
+		left[0][0] * right[2][0] + left[1][0] * right[2][1] + left[2][0] * right[2][2],
+
+		left[0][1] * right[0][0] + left[1][1] * right[0][1] + left[2][1] * right[0][2],
+		left[0][1] * right[1][0] + left[1][1] * right[1][1] + left[2][1] * right[1][2],
+		left[0][1] * right[2][0] + left[1][1] * right[2][1] + left[2][1] * right[2][2],
+
+		left[0][2] * right[0][0] + left[1][2] * right[0][1] + left[2][2] * right[0][2],
+		left[0][2] * right[1][0] + left[1][2] * right[1][1] + left[2][2] * right[1][2],
+		left[0][2] * right[2][0] + left[1][2] * right[2][1] + left[2][2] * right[2][2]);
 
 }
 

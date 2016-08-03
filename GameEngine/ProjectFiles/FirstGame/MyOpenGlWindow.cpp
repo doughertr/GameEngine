@@ -57,16 +57,19 @@ void MyOpenGlWindow::paintGL()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 	Vector3 transformedVerts[NUM_VERTS];
-	Matrix3 translator = Matrix3::translate(shipPosition.x, shipPosition.y);
+	Matrix3 translator = Matrix3::translate(shipPosition);
 	Matrix3 rotator = Matrix3::rotateZ(shipOrientation);
 	
 	shipMatrix = translator * rotator;
 
+	//TRACING
+	/*
 	std::cout << "==================" << std::endl;
 	std::cout << "Translation Matrix" << translator << std::endl;
 	std::cout << "Rotation Matrix" << rotator << std::endl;
 	std::cout << "Ship's Matrix" << shipMatrix << std::endl;
 	std::cout << "==================" << std::endl;
+	*/
 
 	for (unsigned int i = 0; i < NUM_VERTS; i++)
 	{
@@ -114,7 +117,10 @@ void MyOpenGlWindow::updateVelocity()
 	//if (GetAsyncKeyState(0x53)) //S key
 	//	shipVelocity -= ACCELERATION_MAGNETUDE;
 	//if (GetAsyncKeyState(0x44)) //D key
-	//	shipVelocity += ACCELERATION_MAGNETUDE;
+	//	shipVelocity += ACCELERATION_M AGNETUDE;
+
+	Vector3 direction(shipMatrix[1]);
+
 	if (GetAsyncKeyState(VK_SPACE))
-		shipVelocity += ACCELERATION_MAGNETUDE * shipMatrix[1];
+		shipVelocity += direction * ACCELERATION_MAGNETUDE;
 }
