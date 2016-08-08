@@ -23,6 +23,7 @@
     <ClInclude Include="Math\Matrix3.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
+    <ClInclude Include="Debug Tools\Profiling\Profiler.h" />
     <ClInclude Include="Timing\Clock.h" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +33,7 @@
     <None Include="Math\Vector3.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Debug Tools\Profiling\Profiler.cpp" />
     <ClCompile Include="Timing\Clock.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -123,6 +125,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Middleware\sqlite</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
