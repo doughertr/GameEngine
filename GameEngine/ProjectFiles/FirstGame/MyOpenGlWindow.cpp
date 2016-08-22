@@ -26,6 +26,7 @@ namespace {
 	Clock frameClock;
 }
 
+
 bool MyOpenGlWindow::init() 
 {
 	return frameClock.init();
@@ -62,14 +63,6 @@ void MyOpenGlWindow::paintGL()
 	
 	shipMatrix = translator * rotator;
 
-	//TRACING
-	/*
-	std::cout << "==================" << std::endl;
-	std::cout << "Translation Matrix" << translator << std::endl;
-	std::cout << "Rotation Matrix" << rotator << std::endl;
-	std::cout << "Ship's Matrix" << shipMatrix << std::endl;
-	std::cout << "==================" << std::endl;
-	*/
 
 	for (unsigned int i = 0; i < NUM_VERTS; i++)
 	{
@@ -77,9 +70,16 @@ void MyOpenGlWindow::paintGL()
 	}
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(transformedVerts), transformedVerts);
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
 	
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	//text rendering not working
+	renderText(10, 10, 0, QString("Hello"), QFont("Arial", 12, QFont::Bold, false));
+
+
 }
+
+
 
 void MyOpenGlWindow::updateGame()
 {
