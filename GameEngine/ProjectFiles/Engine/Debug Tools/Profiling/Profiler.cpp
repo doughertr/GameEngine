@@ -20,7 +20,13 @@ bool Profiler::shutdown()
 		outStream << categories[i].name;
 		outStream << getDelimiter(i);
 	}
-	for (unsigned int frame = 0; frame < frameIndex; frame++)
+
+	//account for last frame if they added entries
+	unsigned int numActualFrames = frameIndex;
+	if (categoryIndex == numProfileCategories)
+		numActualFrames++;
+
+	for (unsigned int frame = 0; frame < numActualFrames; frame++)
 	{
 		for (unsigned int cat = 0; cat < numProfileCategories; cat++)
 		{
@@ -53,7 +59,7 @@ void Profiler::addEntry(const char * categoryName, float time)
 	else
 	{
 		assert(pc.name == categoryName && categoryName != NULL);
-		assert(categoryIndex < numProfileCategories);
+		assert(categoryIndex <= numProfileCategories);
 	}
 	pc.samples[frameIndex] = time;
 }

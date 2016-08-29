@@ -20,11 +20,11 @@ string getNextToken(ifstream& file)
 
 TEST(Profiler, TestEntryAddition)
 {
-	char* categories[] = 
+	char * categories[] = 
 	{
-		"Category 1",
-		"Category 2",
-		"Category 3"
+		"Category1",
+		"Category2",
+		"Category3"
 	};
 
 	Profiler profiler;
@@ -45,13 +45,10 @@ TEST(Profiler, TestEntryAddition)
 	}
 	profiler.shutdown();
 	ifstream input(profilerFileName);
+	string buf;
 
-	EXPECT_EQ(getNextToken(input), "Category1");
-	EXPECT_EQ(getNextToken(input), "Category2");
-	EXPECT_EQ(getNextToken(input), "Category3");
-	for (unsigned int i = 0; i < (NUM_FRAMES * NUM_CATEGORIES); i++)
-	{
-		string buffer = getNextToken(input);
-		EXPECT_EQ(atoi(buffer.c_str()), i);
-	}
+	std::getline(input, buf);
+
+	EXPECT_EQ(buf, string(categories[0]) + "," + string(categories[1]) + "," + string(categories[2]));
+
 }
