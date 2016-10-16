@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelperFunctions.h" />
+    <ClInclude Include="ProfileTest.h" />
   </ItemGroup>
 </Project>

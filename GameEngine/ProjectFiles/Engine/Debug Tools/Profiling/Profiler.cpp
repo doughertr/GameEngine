@@ -49,14 +49,15 @@ void Profiler::addEntry(const char * categoryName, float time)
 	assert(frameIndex < MAX_FRAME_SAMPLES);
 	assert(categoryIndex < MAX_PROFILE_CATEGORIES);
 
-	ProfileCategory& pc = categories[categoryIndex++];
+	//sets one of the blank profile categories in the array to ref pc
+	ProfileCategory& pc = categories[categoryIndex++];	
 
 	if (frameIndex == 0)
 	{
 		pc.name = categoryName;
 		numProfileCategories++;
 	}
-	else
+	else    //entry was added when the current frame wasn't equal to 0
 	{
 		assert(pc.name == categoryName && categoryName != NULL);
 		assert(categoryIndex <= numProfileCategories);
@@ -65,5 +66,5 @@ void Profiler::addEntry(const char * categoryName, float time)
 }
 char Profiler::getDelimiter(unsigned int index) const
 {
-	return ((index + 1 < numProfileCategories) ? ',' : '\n');
+	return ((index + 1 < numProfileCategories) ? ',\t' : '\n');
 }

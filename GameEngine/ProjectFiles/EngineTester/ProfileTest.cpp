@@ -1,8 +1,21 @@
 #include <gtest\gtest.h>
 #include <Debug Tools\Profiling\Profiler.h>
 #include <fstream>
+#include "ProfileTest.h"
 using std::ifstream;
 using std::string;
+using std::vector;
+
+//unnamed namespace makes these variables private to this .cpp file only
+
+struct ProfileValues
+{
+	const char* const PROFILER_FILE_NAME;
+	const unsigned int NUM_CATEGORIES;
+	const unsigned int NUM_FRAMES;
+	char* categories[NUM_CATEGORIES];
+};
+ProfileValues defualtValues;
 
 string getNextToken(ifstream& file)
 {
@@ -17,22 +30,14 @@ string getNextToken(ifstream& file)
 	}
 	return ret;
 }
-
-TEST(Profiler, TestEntryAddition)
+void writeSamples(const char* const PROFILER_FILE_NAME, char* categories[], const unsigned int NUM_CATEGORIES, const unsigned int NUM_FRAMES)
 {
-	char * categories[] = 
-	{
-		"Category1",
-		"Category2",
-		"Category3"
-	};
+
 
 	Profiler profiler;
-	const char* profilerFileName = "profiles.csv";
-	profiler.init(profilerFileName);
+	profiler.init(PROFILER_FILE_NAME);
 
-	const unsigned int NUM_CATEGORIES = sizeof(categories) / sizeof(*categories);
-	const unsigned int NUM_FRAMES = 5;
+
 	float sampleNum = 0;
 
 	for (float frame = 0; frame < NUM_FRAMES; frame++) {
@@ -44,11 +49,20 @@ TEST(Profiler, TestEntryAddition)
 
 	}
 	profiler.shutdown();
-	ifstream input(profilerFileName);
+}
+
+TEST(Profiler, TestEntryAddition)
+{
+	writeSamples(defaultValues);
+	ifstream input(PROFILER_FILE_NAME);
 	string buf;
 
 	std::getline(input, buf);
 
-	EXPECT_EQ(buf, string(categories[0]) + "," + string(categories[1]) + "," + string(categories[2]));
+	EXPECT_EQ(buf, string(categories[0]) + ",\t" + string(categories[1]) + ",\t" + string(categories[2]));
 
+}
+TEST(Profiler, ExcludeIncompleteGameFrames)
+{
+	writeSamples();
 }
