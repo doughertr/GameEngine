@@ -20,7 +20,7 @@ class __declspec(dllexport) Profiler
 		float samples[MAX_FRAME_SAMPLES];
 	} categories[MAX_PROFILE_CATEGORIES];
 
-	char getDelimiter(unsigned int index) const;
+	char* getDelimiter(unsigned int index) const;
 public:
 	bool init(const char* fileName);
 	bool shutdown();

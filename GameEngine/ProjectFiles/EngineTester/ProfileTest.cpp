@@ -7,15 +7,20 @@ using std::string;
 using std::vector;
 
 //unnamed namespace makes these variables private to this .cpp file only
-
-struct ProfileValues
+namespace 
 {
-	const char* const PROFILER_FILE_NAME;
-	const unsigned int NUM_CATEGORIES;
-	const unsigned int NUM_FRAMES;
-	char* categories[NUM_CATEGORIES];
+	Profiler profiler;
+	const char* const PROFILER_FILE_NAME = "profiles.csv";
+
+	char* categories[] = 
+	{
+		"Category1",
+		"Category2",
+		"Category3"
+	};
+	const unsigned int NUM_CATEGORIES = sizeof(categories) / sizeof(*categories);
+	const unsigned int NUM_FRAMES = 5;
 };
-ProfileValues defualtValues;
 
 string getNextToken(ifstream& file)
 {
@@ -30,14 +35,8 @@ string getNextToken(ifstream& file)
 	}
 	return ret;
 }
-void writeSamples(const char* const PROFILER_FILE_NAME, char* categories[], const unsigned int NUM_CATEGORIES, const unsigned int NUM_FRAMES)
+void writeSamples()
 {
-
-
-	Profiler profiler;
-	profiler.init(PROFILER_FILE_NAME);
-
-
 	float sampleNum = 0;
 
 	for (float frame = 0; frame < NUM_FRAMES; frame++) {
@@ -46,14 +45,27 @@ void writeSamples(const char* const PROFILER_FILE_NAME, char* categories[], cons
 		{
 			profiler.addEntry(categories[cat], sampleNum++);
 		}
-
 	}
-	profiler.shutdown();
+}
+void checkSamples()
+{
+	ifstream input(PROFILER_FILE_NAME);
+
+	EXPECT_EQ(getNextToken(input), "Category1");
+	EXPECT_EQ(getNextToken(input), "Category2");
+	EXPECT_EQ(getNextToken(input), "Category3");
+	for (int i = 0; i < (NUM_CATEGORIES * NUM_CATEGORIES); i++)
+	{
+		string buf = getNextToken(input);
+		EXPECT_EQ(atoi(buf.c_str()), i);
+	}
 }
 
 TEST(Profiler, TestEntryAddition)
 {
-	writeSamples(defaultValues);
+	profiler.init(PROFILER_FILE_NAME);
+	writeSamples();
+	profiler.shutdown();
 	ifstream input(PROFILER_FILE_NAME);
 	string buf;
 
@@ -64,5 +76,10 @@ TEST(Profiler, TestEntryAddition)
 }
 TEST(Profiler, ExcludeIncompleteGameFrames)
 {
+	profiler.init(PROFILER_FILE_NAME);
 	writeSamples();
+	checkSamples();
+	profiler.addEntry(categories[0], 16);
+	profiler.shutdown();
+
 }

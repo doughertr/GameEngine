@@ -64,7 +64,7 @@ void Profiler::addEntry(const char * categoryName, float time)
 	}
 	pc.samples[frameIndex] = time;
 }
-char Profiler::getDelimiter(unsigned int index) const
+char* Profiler::getDelimiter(unsigned int index) const
 {
-	return ((index + 1 < numProfileCategories) ? ',\t' : '\n');
+	return ((index + 1 < numProfileCategories) ? ",\t" : "\n");
 }
