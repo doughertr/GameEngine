@@ -214,8 +214,8 @@ TEST(Matrix3, MatrixZRotation)
 	//NOTE: PI and PI/2 Tests were having 
 	//trouble with float equals, returning
 	//values very close but not equal to 
-	//zero (becuase of floating point error)
-	//Added very small threashold instead
+	//zero (because of floating point error)
+	//Added very small threshold instead
 	//=====================================
 
 	op = Matrix3::rotateZ(PI);

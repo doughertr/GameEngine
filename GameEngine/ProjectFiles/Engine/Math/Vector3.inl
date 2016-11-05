@@ -26,6 +26,21 @@ Vector3& Vector3::operator/=(float scalar)
 	this->z = this->z / scalar;
 	return *this;
 }
+Vector3& Vector3::operator&=(const Vector3 &vec)
+{
+	this->x = this->y * vec.z - this->z * vec.y;
+	this->y = this->z * vec.x - this->x * vec.z;
+	this->z = this->x * vec.y - this->y * vec.x;
+	return *this;
+}
+Vector3 Vector3::Cross(const Vector3 &vec1, const Vector3 &vec2)
+{
+	return vec1 & vec2;
+}
+Vector3& Vector3::CrossEquals(const Vector3 &vec)
+{
+	return *this &= vec;
+}
 float & Vector3::operator[](int index)
 {
 	switch (index)
@@ -83,6 +98,13 @@ Vector3 operator*(const Vector3 &vec2, float scalar)
 float operator*(const Vector3 &vec1, const Vector3 &vec2)
 {
 	return (vec1.x*vec2.x) + (vec1.y*vec2.y) + (vec1.z*vec2.z);
+}
+Vector3 operator&(const Vector3 &vec1, const Vector3 &vec2)
+{
+	return Vector3(
+		vec1.y * vec2.z - vec1.z * vec2.y,
+		vec1.z * vec2.x - vec1.x * vec2.z,
+		vec1.x * vec2.y - vec1.y * vec2.x);
 }
 std::ostream& operator<<(std::ostream& os, const Vector3& vector)
 {

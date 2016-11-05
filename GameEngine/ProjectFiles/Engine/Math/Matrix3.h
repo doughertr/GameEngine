@@ -13,6 +13,8 @@ namespace Math
 	...........(y)| 0 , 1 , 0 |
 	...........(z)| 0 , 0 , 1 |
 	*/
+	
+	//TODO: ADD DETERMINANT METHOD
 	struct Matrix3
 	{
 		Vector3 basisVector0;
@@ -28,7 +30,8 @@ namespace Math
 		inline static Matrix3 rotateZ(float radians);
 		inline static Matrix3 translate(float x, float y);
 		inline static Matrix3 translate(Vector3 offset);
-
+		
+		inline Vector3 Determinant();
 		inline Vector3& operator[](int index);
 		inline Vector3 operator[](int index) const;
 	};

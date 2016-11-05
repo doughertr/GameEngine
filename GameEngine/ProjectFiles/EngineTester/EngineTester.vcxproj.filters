@@ -14,4 +14,7 @@
     <ClInclude Include="HelperFunctions.h" />
     <ClInclude Include="ProfileTest.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="profiles.csv" />
+  </ItemGroup>
 </Project>

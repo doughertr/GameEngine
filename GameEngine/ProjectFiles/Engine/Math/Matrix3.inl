@@ -1,4 +1,4 @@
-Matrix3::Matrix3(
+﻿Matrix3::Matrix3(
 	float r0c0, float r0c1, float r0c2,
 	float r1c0, float r1c1, float r1c2,
 	float r2c0, float r2c1, float r2c2)
@@ -18,6 +18,22 @@ Matrix3::Matrix3(Vector3 basisVector0, Vector3 basisVector1, Vector3 translation
 	this->basisVector0 = basisVector0;
 	this->basisVector1 = basisVector1;
 	this->translationVector = translationVector;
+}
+Vector3 Matrix3::Determinant() {
+	/*
+	Determinant Matrix Format
+		   ^   ^   ^
+		|  x,  y,  z |
+		| u1, u2, u3 |
+		| v1, v2, v3 |
+	*/
+	Vector3 u(basisVector0.y, basisVector1.y, translationVector.y);
+	Vector3 v(basisVector0.z, basisVector1.z, translationVector.z);
+
+	return Vector3(
+		basisVector0.x * (u.y * v.z - u.z * v.y), 
+		basisVector0.y * (u.z * v.x - u.x * v.z),
+		basisVector0.z * (u.x * v.y - u.y * v.x));
 }
 Vector3 & Matrix3::operator[](int index)
 {
