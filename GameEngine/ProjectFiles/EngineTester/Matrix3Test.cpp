@@ -10,38 +10,44 @@ using Math::Vector3;
 
 TEST(Matrix3, MatrixConstructor)
 {
-	Matrix3 indentityMatrix;
+//	testConstruction<Matrix3>();
+//	testConstruction<Matrix2H>();
+}
+template<class T>
+void testConstruction() 
+{
+	T indentityMatrix;
 	EXPECT_FLOAT_EQ(indentityMatrix.basisVector0.x, 1.0f);
 	EXPECT_FLOAT_EQ(indentityMatrix.basisVector0.y, 0.0f);
-	EXPECT_FLOAT_EQ(indentityMatrix.basisVector0.z, 0.0f);
+	if (typeid(T) == Matrix3)
+		EXPECT_FLOAT_EQ(indentityMatrix.basisVector0.z, 0.0f);
 
 	EXPECT_FLOAT_EQ(indentityMatrix.basisVector1.x, 0.0f);
 	EXPECT_FLOAT_EQ(indentityMatrix.basisVector1.y, 1.0f);
-	EXPECT_FLOAT_EQ(indentityMatrix.basisVector1.z, 0.0f);
+	if (typeid(T) == Matrix3)
+		EXPECT_FLOAT_EQ(indentityMatrix.basisVector1.z, 0.0f);
 
 	EXPECT_FLOAT_EQ(indentityMatrix.translationVector.x, 0.0f);
 	EXPECT_FLOAT_EQ(indentityMatrix.translationVector.y, 0.0f);
-	EXPECT_FLOAT_EQ(indentityMatrix.translationVector.z, 1.0f);
+	if (typeid(T) == Matrix3)
+		EXPECT_FLOAT_EQ(indentityMatrix.translationVector.z, 1.0f);
 
-	Matrix3 otherMatrix(
-		 9.1f,  3.0f, -1.0f, 
-		 6.0f,  7.0f,  4.0f,
-		-5.3f, -9.1f,  5.6f);
+	T otherMatrix(
+		9.1f, 3.0f, -1.0f,
+		6.0f, 7.0f, 4.0f,
+		-5.3f, -9.1f, 5.6f);
 
 	EXPECT_FLOAT_EQ(otherMatrix.basisVector0.x, 9.1f);
 	EXPECT_FLOAT_EQ(otherMatrix.basisVector0.y, 6.0f);
-	EXPECT_FLOAT_EQ(otherMatrix.basisVector0.z,-5.3f);
+	EXPECT_FLOAT_EQ(otherMatrix.basisVector0.z, -5.3f);
 
 	EXPECT_FLOAT_EQ(otherMatrix.basisVector1.x, 3.0f);
 	EXPECT_FLOAT_EQ(otherMatrix.basisVector1.y, 7.0f);
-	EXPECT_FLOAT_EQ(otherMatrix.basisVector1.z,-9.1f);
+	EXPECT_FLOAT_EQ(otherMatrix.basisVector1.z, -9.1f);
 
-	EXPECT_FLOAT_EQ(otherMatrix.translationVector.x,-1.0f);
+	EXPECT_FLOAT_EQ(otherMatrix.translationVector.x, -1.0f);
 	EXPECT_FLOAT_EQ(otherMatrix.translationVector.y, 4.0);
 	EXPECT_FLOAT_EQ(otherMatrix.translationVector.z, 5.6f);
-
-
-
 }
 TEST(Matrix3, MatrixArrayConstructor)
 {

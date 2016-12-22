@@ -39,7 +39,8 @@ void writeSamples()
 {
 	float sampleNum = 0;
 
-	for (float frame = 0; frame < NUM_FRAMES; frame++) {
+	for (float frame = 0; frame < NUM_FRAMES; frame++) 
+	{
 		profiler.newFrame();
 		for (unsigned int cat = 0; cat < NUM_CATEGORIES; cat++)
 		{
@@ -47,6 +48,15 @@ void writeSamples()
 		}
 	}
 }
+bool isAtEndOfFile(ifstream& input) 
+{
+	if (!input.good())
+		return false;
+	char bitBucket;
+	input >> bitBucket;
+	return !input.good();
+}
+
 void checkSamples()
 {
 	ifstream input(PROFILER_FILE_NAME);
@@ -59,6 +69,7 @@ void checkSamples()
 		string buf = getNextToken(input);
 		EXPECT_EQ(atoi(buf.c_str()), i);
 	}
+	EXPECT_TRUE(isAtEndOfFile(input));
 }
 #if false
 TEST(Profiler, TestEntryAddition)

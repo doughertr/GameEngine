@@ -28,14 +28,17 @@ Vector3& Vector3::operator/=(float scalar)
 }
 Vector3& Vector3::operator&=(const Vector3 &vec)
 {
-	this->x = this->y * vec.z - this->z * vec.y;
-	this->y = this->z * vec.x - this->x * vec.z;
-	this->z = this->x * vec.y - this->y * vec.x;
+	float tempX = this->x;
+	float tempY = this->y;
+	float tempZ = this->z;
+	this->x = tempY * vec.z - tempZ * vec.y;
+	this->y = tempZ * vec.x - tempX * vec.z;
+	this->z = tempX * vec.y - tempY * vec.x;
 	return *this;
 }
-Vector3 Vector3::Cross(const Vector3 &vec1, const Vector3 &vec2)
+Vector3 Vector3::Cross(const Vector3 &vec)
 {
-	return vec1 & vec2;
+	return *this & vec;
 }
 Vector3& Vector3::CrossEquals(const Vector3 &vec)
 {

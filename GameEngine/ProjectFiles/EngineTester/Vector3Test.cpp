@@ -222,6 +222,7 @@ TEST(Vector3, VectorDivisionEquals)
 		EXPECT_FLOAT_EQ(vec.z, originalZ / scalar);
 	}
 }
+
 TEST(Vector3, VectorIndexing)
 {
 	for (unsigned int i = 0; i < NUM_TESTS; i++) {
@@ -230,6 +231,62 @@ TEST(Vector3, VectorIndexing)
 		EXPECT_FLOAT_EQ(vec.x, vec[0]);
 		EXPECT_FLOAT_EQ(vec.y, vec[1]);
 		EXPECT_FLOAT_EQ(vec.z, vec[2]);
+	}
+}
+
+TEST(Vector3, VectorCrossProduct)
+{
+	//testing function
+	for (int i = 0; i < NUM_TESTS; i++)
+	{
+
+		Vector3 u(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+		Vector3 v(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+
+		Vector3 testVec = u.Cross(v);
+		EXPECT_FLOAT_EQ(testVec.x, (u.y * v.z - u.z * v.y));
+		EXPECT_FLOAT_EQ(testVec.y, (u.z * v.x - u.x * v.z));
+		EXPECT_FLOAT_EQ(testVec.z, (u.x * v.y - u.y * v.x));
+	}
+	//testing operator
+	for (int i = 0; i < NUM_TESTS; i++)
+	{
+
+		Vector3 u(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+		Vector3 v(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+
+		Vector3 testVec = u & v;
+		EXPECT_FLOAT_EQ(testVec.x, (u.y * v.z - u.z * v.y));
+		EXPECT_FLOAT_EQ(testVec.y, (u.z * v.x - u.x * v.z));
+		EXPECT_FLOAT_EQ(testVec.z, (u.x * v.y - u.y * v.x));
+	}
+}
+
+TEST(Vector3, VectorCrossEqualsProduct)
+{
+	//testing function
+	for (int i = 0; i < NUM_TESTS; i++)
+	{
+		Vector3 u(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+		Vector3 v(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+		Vector3 oldVectorU(u);
+
+		u.CrossEquals(v);
+		EXPECT_FLOAT_EQ(u.x, (oldVectorU.y * v.z - oldVectorU.z * v.y));
+		EXPECT_FLOAT_EQ(u.y, (oldVectorU.z * v.x - oldVectorU.x * v.z));
+		EXPECT_FLOAT_EQ(u.z, (oldVectorU.x * v.y - oldVectorU.y * v.x));
+	}
+	//testing operator
+	for (int i = 0; i < NUM_TESTS; i++)
+	{
+		Vector3 u(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+		Vector3 v(RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f), RandomFloat(-1000.0f, 1000.0f));
+		Vector3 oldVectorU(u);
+
+		u &= v;
+		EXPECT_FLOAT_EQ(u.x, (oldVectorU.y * v.z - oldVectorU.z * v.y));
+		EXPECT_FLOAT_EQ(u.y, (oldVectorU.z * v.x - oldVectorU.x * v.z));
+		EXPECT_FLOAT_EQ(u.z, (oldVectorU.x * v.y - oldVectorU.y * v.x));
 	}
 }
 

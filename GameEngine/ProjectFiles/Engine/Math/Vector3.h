@@ -16,7 +16,7 @@ namespace Math
 		inline Vector3& operator*=(float scalar);
 		inline Vector3& operator/=(float scalar);
 		inline Vector3& operator&=(const Vector3 &vec);
-		inline Vector3 Cross(const Vector3 &vec1, const Vector3 &vec2);
+		inline Vector3 Cross(const Vector3 &vec);
 		inline Vector3& CrossEquals(const Vector3 &vec);
 		inline float & operator[](int index);
 		inline float operator[](int index) const;

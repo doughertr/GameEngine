@@ -16,12 +16,15 @@
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Debug Tools\Profiling\Profiler.h" />
     <ClInclude Include="Math\Matrix4.h" />
+    <ClInclude Include="Math\Vector4.h" />
+    <ClInclude Include="Math\Matrix2H.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\Vector2.inl" />
     <None Include="Math\Matrix2.inl" />
     <None Include="Math\Matrix3.inl" />
     <None Include="Math\Vector3.inl" />
+    <None Include="Math\Vector4.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timing\Clock.cpp" />

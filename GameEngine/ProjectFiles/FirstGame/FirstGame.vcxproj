@@ -75,8 +75,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)..\..\..\Demo\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\Tmp\</IntDir>
+    <TargetName>Demo</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -118,7 +119,10 @@
       <AdditionalDependencies>Engine.lib; opengl32.lib; glew32.lib; glew32s.lib; Qt5OpenGLd.lib; Qt5Cored.lib; Qt5Guid.lib; Qt5Widgetsd.lib; kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>copy "$(ProjectDir)..\Engine\$(Platform)\$(Configuration)\Engine.dll" "$(OutDir)"</Command>
+      <Command>copy "$(ProjectDir)..\Engine\$(Platform)\$(Configuration)\Engine.dll" "$(TargetDir)"
+copy "$(SolutionDir)..\Middleware\glew\bin\*.DLL" "$(TargetDir)"
+copy "$(SolutionDir)..\Middleware\Qt\bin\*.DLL" "$(TargetDir)"</Command>
+      <Message>Copying Engine dll, glew Dlls, and QT dlls into exe location</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
