@@ -31,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\Matrix2.inl" />
+    <None Include="Math\Matrix2H.inl" />
     <None Include="Math\Matrix3.inl" />
     <None Include="Math\Vector2.inl" />
     <None Include="Math\Vector3.inl" />

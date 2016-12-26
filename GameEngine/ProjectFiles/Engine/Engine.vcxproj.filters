@@ -25,6 +25,7 @@
     <None Include="Math\Matrix3.inl" />
     <None Include="Math\Vector3.inl" />
     <None Include="Math\Vector4.inl" />
+    <None Include="Math\Matrix2H.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Timing\Clock.cpp" />
