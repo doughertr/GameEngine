@@ -8,9 +8,25 @@
 }
 Matrix2H::Matrix2H(float values[2][3])
 {
-	this->basisVector0 = Vector2(values[0][0], values[1][0]);
-	this->basisVector1 = Vector2(values[0][1], values[1][1]);
-	this->basisVector2 = Vector2(values[0][2], values[1][2]);
+	//this->basisVector0 = Vector2(values[0][0], values[1][0]);
+	//this->basisVector1 = Vector2(values[0][1], values[1][1]);
+	//this->basisVector2 = Vector2(values[0][2], values[1][2]);
+
+	//reorganized for optimal cache hits
+	this->basisVector0 = Vector2();
+	this->basisVector0.x = values[0][0];
+
+	this->basisVector1 = Vector2();
+	this->basisVector1.x = values[0][1];
+
+	this->basisVector2 = Vector2();
+	this->basisVector2.x = values[0][2];
+
+	this->basisVector0.y = values[1][0];
+
+	this->basisVector1.y = values[1][1];
+
+	this->basisVector2.y = values[1][2];
 }
 Matrix2H::Matrix2H(Vector2 basisVector0, Vector2 basisVector1, Vector2 basisVector2)
 {
@@ -80,8 +96,7 @@ Vector2 operator*(const Matrix2H& matrix, const Vector3& vector)
 {
 	return Vector2(
 		matrix[0][0] * vector.x + matrix[1][0] * vector.y + matrix[2][0] * vector.z,
-		matrix[0][1] * vector.x + matrix[1][1] * vector.y + matrix[2][1] * vector.z,
-	);
+		matrix[0][1] * vector.x + matrix[1][1] * vector.y + matrix[2][1] * vector.z);
 }
 Matrix2H operator*(const Matrix2H& left, const Matrix2H& right)
 {
@@ -92,11 +107,7 @@ Matrix2H operator*(const Matrix2H& left, const Matrix2H& right)
 
 		left[0][1] * right[0][0] + left[1][1] * right[0][1] + left[2][1] * right[0][2],
 		left[0][1] * right[1][0] + left[1][1] * right[1][1] + left[2][1] * right[1][2],
-		left[0][1] * right[2][0] + left[1][1] * right[2][1] + left[2][1] * right[2][2],
-
-		left[0][2] * right[0][0] + left[1][2] * right[0][1] + left[2][2] * right[0][2],
-		left[0][2] * right[1][0] + left[1][2] * right[1][1] + left[2][2] * right[1][2],
-		left[0][2] * right[2][0] + left[1][2] * right[2][1] + left[2][2] * right[2][2]);
+		left[0][1] * right[2][0] + left[1][1] * right[2][1] + left[2][1] * right[2][2]);
 
 }
 
@@ -105,6 +116,5 @@ std::ostream& operator<<(std::ostream& os, const Matrix2H& matrix)
 	os << std::endl;
 	os << "| " << matrix[0][0] << ", " << matrix[1][0] << ", " << matrix[2][0] << " |" << std::endl;
 	os << "| " << matrix[0][1] << ", " << matrix[1][1] << ", " << matrix[2][1] << " |" << std::endl;
-	os << "| " << matrix[0][2] << ", " << matrix[1][2] << ", " << matrix[2][2] << " |" << std::endl;
 	return os;
 }

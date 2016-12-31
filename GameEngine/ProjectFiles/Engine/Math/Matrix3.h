@@ -19,13 +19,13 @@ namespace Math
 	{
 		Vector3 basisVector0;
 		Vector3 basisVector1;
-		Vector3 translationVector;
+		Vector3 basisVector2;
 
 		explicit inline Matrix3(float r0c0 = 1.0f, float r0c1 = 0.0f, float r0c2 = 0.0f,
 								float r1c0 = 0.0f, float r1c1 = 1.0f, float r1c2 = 0.0f, 
 								float r2c0 = 0.0f, float r2c1 = 0.0f, float r2c2 = 1.0f);
 		inline Matrix3(float values[3][3]);
-		inline Matrix3(Vector3 basisVector0, Vector3 basisVector1, Vector3 translationVector);
+		inline Matrix3(Vector3 basisVector0, Vector3 basisVector1, Vector3 basisVector2);
 
 		inline static Matrix3 rotateZ(float radians);
 		inline static Matrix3 translate(float x, float y);

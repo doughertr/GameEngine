@@ -3,7 +3,7 @@
 void main(int argc, char* argv[])
 {
 	//Filtering
-	::testing::GTEST_FLAG(filter) = "Vector*";
+	::testing::GTEST_FLAG(filter) = "Matrix*";
 
 	//Executing Tests
 	::testing::InitGoogleTest(&argc, argv);

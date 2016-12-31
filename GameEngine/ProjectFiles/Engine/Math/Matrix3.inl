@@ -5,19 +5,42 @@
 {
 	this->basisVector0 = Vector3(r0c0, r1c0, r2c0);
 	this->basisVector1 = Vector3(r0c1, r1c1, r2c1);
-	this->translationVector = Vector3(r0c2, r1c2, r2c2);
+	this->basisVector2 = Vector3(r0c2, r1c2, r2c2);
 }
 Matrix3::Matrix3(float values[3][3])
 {
-	this->basisVector0 = Vector3(values[0][0], values[1][0], values[2][0]);
-	this->basisVector1 = Vector3(values[0][1], values[1][1], values[2][1]);
-	this->translationVector = Vector3(values[0][2], values[1][2], values[2][2]);
+	//this->basisVector0 = Vector3(values[0][0], values[1][0], values[2][0]);
+	//this->basisVector1 = Vector3(values[0][1], values[1][1], values[2][1]);
+	//this->basisVector2 = Vector3(values[0][2], values[1][2], values[2][2]);
+
+	//reorganized for optimal cache hits
+	this->basisVector0 = Vector3();
+	this->basisVector0.x = values[0][0];
+
+	this->basisVector1 = Vector3();
+	this->basisVector1.x = values[0][1];
+
+	this->basisVector2 = Vector3();
+	this->basisVector2.x = values[0][2];
+
+	this->basisVector0.y = values[1][0];
+
+	this->basisVector1.y = values[1][1];
+
+	this->basisVector2.y = values[1][2];
+
+
+	this->basisVector0.z = values[2][0];
+
+	this->basisVector1.z = values[2][1];
+
+	this->basisVector2.z = values[2][2];
 }
-Matrix3::Matrix3(Vector3 basisVector0, Vector3 basisVector1, Vector3 translationVector)
+Matrix3::Matrix3(Vector3 basisVector0, Vector3 basisVector1, Vector3 basisVector2)
 {
 	this->basisVector0 = basisVector0;
 	this->basisVector1 = basisVector1;
-	this->translationVector = translationVector;
+	this->basisVector2 = basisVector2;
 }
 Vector3 Matrix3::Determinant() {
 	/*
@@ -27,8 +50,8 @@ Vector3 Matrix3::Determinant() {
 		| u1, u2, u3 |
 		| v1, v2, v3 |
 	*/
-	Vector3 u(basisVector0.y, basisVector1.y, translationVector.y);
-	Vector3 v(basisVector0.z, basisVector1.z, translationVector.z);
+	Vector3 u(basisVector0.y, basisVector1.y, basisVector2.y);
+	Vector3 v(basisVector0.z, basisVector1.z, basisVector2.z);
 
 	return Vector3(
 		basisVector0.x * (u.y * v.z - u.z * v.y), 
@@ -46,7 +69,7 @@ Vector3 & Matrix3::operator[](int index)
 		return this->basisVector1;
 		break;
 	case 2:
-		return this->translationVector;
+		return this->basisVector2;
 		break;
 	default:
 		throw std::out_of_range("3D Matrix can only have a max of three Vectors");
@@ -64,7 +87,7 @@ Vector3 Matrix3::operator[](int index) const
 		return this->basisVector1;
 		break;
 	case 2:
-		return this->translationVector;
+		return this->basisVector2;
 		break;
 	default:
 		throw std::out_of_range("3D Matrix can only have a max of three Vectors");
