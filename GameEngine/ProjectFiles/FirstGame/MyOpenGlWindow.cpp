@@ -17,7 +17,7 @@ namespace {
 		Vector3(-0.1f ,  -0.1f,       1.0f),
 		Vector3(+0.1f ,  -0.1f,       1.0f),
 	};
-	const unsigned int NUM_VERTS = sizeof(verticies) / sizeof(*verticies);
+	const int NUM_VERTS = sizeof(verticies) / sizeof(*verticies);
 	Vector3 shipPosition(0.0f, 0.0f, 1.0f);
 	Vector3 shipVelocity;
 	Vector3 shipAcceleration;
@@ -64,7 +64,7 @@ void MyOpenGlWindow::paintGL()
 	shipMatrix = translator * rotator;
 
 
-	for (unsigned int i = 0; i < NUM_VERTS; i++)
+	for (int i = 0; i < NUM_VERTS; i++)
 	{
 		transformedVerts[i] = shipMatrix * verticies[i];
 	}
@@ -89,6 +89,7 @@ void MyOpenGlWindow::updateGame()
 	updatePosition();
 	repaint();
 }
+
 
 bool MyOpenGlWindow::shutdown()
 {

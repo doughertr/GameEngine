@@ -27,6 +27,7 @@
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Debug Tools\Profiling\Profiler.h" />
     <ClInclude Include="Math\Vector4.h" />
+    <ClInclude Include="Math\IntegrationField.h" />
     <ClInclude Include="Timing\Clock.h" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Debug Tools\Profiling\Profiler.cpp" />
+    <ClCompile Include="Math\IntegrationField.cpp" />
     <ClCompile Include="Timing\Clock.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
