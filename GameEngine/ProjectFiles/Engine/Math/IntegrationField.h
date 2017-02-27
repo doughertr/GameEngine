@@ -20,8 +20,8 @@ namespace Math
 		void set_val(const int & x, const int & y, const int & val);
 		void set_val(const Math::Vector2 & vec, const int & val);
 
-		std::vector<Vector2> get_neighbors(const int & x, const int & y);
-		std::vector<Vector2> get_neighbors(const int & x, const int & y);
+		std::list<Vector2> get_neighbors(const int & x, const int & y) const;
+		std::list<Vector2> get_neighbors(const Math::Vector2 & vec) const;
 	};
 }
 #endif

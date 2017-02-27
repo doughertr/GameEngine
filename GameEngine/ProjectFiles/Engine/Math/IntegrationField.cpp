@@ -1,4 +1,5 @@
 #include <list>
+#include "Vector2.h"
 #include "IntegrationField.h"
 
 using namespace std;
@@ -19,6 +20,26 @@ void Math::IntegrationField::set_val(const int & x, const int & y, const int & v
 void Math::IntegrationField::set_val(const Math::Vector2 & vec, const int & val)
 {
 	set_val(vec.x, vec.y, val);
+}
+std::list<Math::Vector2> Math::IntegrationField::get_neighbors(const int & x, const int & y) const
+{
+	int left = x - 1, right = x + 1, up = y - 1, down = y + 1;
+	list<Math::Vector2> neighbors;
+
+	//checking all positions of 
+	if (left >= 0)
+		neighbors.push_back(Vector2(left, y));
+	if (right >= 0)
+		neighbors.push_back(Vector2(right, y));
+	if (up >= 0)
+		neighbors.push_back(Vector2(x, up));
+	if (down >= 0)
+		neighbors.push_back(Vector2(x, down));
+	return neighbors;
+}
+std::list<Math::Vector2> Math::IntegrationField::get_neighbors(const Vector2 & vec) const
+{
+	return get_neighbors(vec.x, vec.y);
 }
 void Math::IntegrationField::reset_field()
 {
@@ -42,4 +63,22 @@ void Math::IntegrationField::calculate_field(const int & x, const int & y)
 	set_val(target, 0);
 	openList.push_back(target);
 
+	while (openList.size() > 0)
+	{
+		//start by getting first node in the openlist
+		Vector2 current = openList.front();
+		openList.pop_front();
+
+		int currentX = current.x;
+		int currentY = current.y;
+
+		std::list<Vector2> neighbors = get_neighbors(current);
+		int neighborCount = neighbors.size();
+
+		for (int i = 0; i < neighborCount; i++)
+		{
+			if()
+		}
+	}
+	
 }
