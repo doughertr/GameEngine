@@ -9,6 +9,7 @@
     <ClCompile Include="Vector3Test.cpp" />
     <ClCompile Include="Matrix3Test.cpp" />
     <ClCompile Include="ProfileTest.cpp" />
+    <ClCompile Include="IntegrationFieldTester.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HelperFunctions.h" />

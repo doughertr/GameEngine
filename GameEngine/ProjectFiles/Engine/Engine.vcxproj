@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Math\CostField.h" />
     <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Matrix2H.h" />
     <ClInclude Include="Math\Matrix3.h" />
@@ -40,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Debug Tools\Profiling\Profiler.cpp" />
+    <ClCompile Include="Math\CostField.cpp" />
     <ClCompile Include="Math\IntegrationField.cpp" />
     <ClCompile Include="Timing\Clock.cpp" />
   </ItemGroup>

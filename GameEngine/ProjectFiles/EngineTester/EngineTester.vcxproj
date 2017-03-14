@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\Middleware\googletest\src\gtest-all.cc" />
     <ClCompile Include="ClockTest.cpp" />
+    <ClCompile Include="IntegrationFieldTester.cpp" />
     <ClCompile Include="MainTester.cpp" />
     <ClCompile Include="Matrix2Test.cpp" />
     <ClCompile Include="Matrix3Test.cpp" />

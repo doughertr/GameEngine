@@ -19,6 +19,7 @@
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Math\Matrix2H.h" />
     <ClInclude Include="Math\IntegrationField.h" />
+    <ClInclude Include="Math\CostField.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\Vector2.inl" />
@@ -32,5 +33,6 @@
     <ClCompile Include="Timing\Clock.cpp" />
     <ClCompile Include="Debug Tools\Profiling\Profiler.cpp" />
     <ClCompile Include="Math\IntegrationField.cpp" />
+    <ClCompile Include="Math\CostField.cpp" />
   </ItemGroup>
 </Project>
