@@ -1,3 +1,9 @@
+*.vcxproj.filters
+*.exp
+*.tlog
+*.idb
+
+
 #other
 *.opendb
 *.sdf

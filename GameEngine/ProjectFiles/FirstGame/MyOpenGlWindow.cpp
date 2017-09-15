@@ -100,7 +100,7 @@ void MyOpenGlWindow::updatePosition()
 }
 void MyOpenGlWindow::updateRotation()
 {
-	const float ANGULAR_MOVEMENT = 0.1f;
+	const float ANGULAR_MOVEMENT = 0.01f;
 	
 	if (GetAsyncKeyState(VK_RIGHT)) 
 		shipOrientation -= ANGULAR_MOVEMENT;
