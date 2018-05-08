@@ -39,6 +39,7 @@
   <ItemGroup>
     <ClCompile Include="Debug Tools\Profiling\Profiler.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
+    <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Timing\Clock.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

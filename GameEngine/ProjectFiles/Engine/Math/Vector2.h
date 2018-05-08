@@ -1,6 +1,8 @@
 #ifndef ENGINE_VECTOR_2
 #define ENGINE_VECTOR_2
+
 #include <iostream>
+#include "Vector3.h"
 
 namespace RyEngine
 {
@@ -10,7 +12,8 @@ namespace Math
 	class Vector2
 	{
 	public:
-		union {
+		union 
+		{
 			struct
 			{
 				T x;
@@ -18,18 +21,24 @@ namespace Math
 			};
 			T val[2];
 		};
-		explicit Vector2(T xVal = 0.0f, T yVal = 0.0f) : x(xVal), y(yVal) {}
+		// -----------------------------------------
+		// CONSTRUCTORS 
+		// -----------------------------------------
+		explicit Vector2(T xVal, T yVal) : x(xVal), y(yVal) {}
+		Vector2() : x(), y() {}
 
-		// Vector mathmatics
+		// -----------------------------------------
+		// VECTOR MATH OPERATORS
+		// -----------------------------------------
 		inline Vector2<T> operator+(const Vector2<T> &other);
 		inline Vector2<T>& operator+=(const Vector2<T> &other);
 		inline Vector2<T> operator-(const Vector2<T> &other);
 		inline Vector2<T>& operator-=(const Vector2<T> &other);
 		template<typename TDot = T> inline TDot operator*(const Vector2<T> &other);
-		inline Vector3<T> operator^(const Vector2<T> &other);
 
-		// Vector properties
-		inline Vector3<T> cross(const Vector2<T> &other);
+		// -----------------------------------------
+		// VECTOR PROPERTIES
+		// -----------------------------------------
 		template<typename TAngle = T> inline TAngle angle(const Vector2<T> &other);
 		template<typename TMag = T> inline TMag magnitude();
 		template<typename TLen = T> __forceinline TLen length();
@@ -37,25 +46,35 @@ namespace Math
 		template<typename TLenSq = T> __forceinline TLenSq lengthSquared();
 		inline void normalize();
 
-		// Scalar mathmatics
+		// -----------------------------------------
+		// SCALAR MATH OPERATORS
+		// -----------------------------------------
 		template<typename TScalar = T> inline Vector2<T> operator*(TScalar scalar);
-		template<typename TScalar = T> inline friend Vector2<T> operator*(TScalar scalar, const Vector2<T> &vec);
+		template<typename TScalar = T> inline friend Vector2<T> operator*(TScalar scalar, const Vector2<T> &vec)
+		{
+			return Vector2<T>(vec.x * scalar, vec.y * scalar);
+		}
 		template<typename TScalar = T> inline Vector2<T>& operator*=(TScalar scalar);
 		template<typename TScalar = T> inline Vector2<T> operator/(TScalar scalar);
-		template<typename TScalar = T> inline friend Vector2<T> operator/(TScalar scalar, const Vector2<T> &vec);
+		template<typename TScalar = T> inline friend Vector2<T> operator/(TScalar scalar, const Vector2<T> &vec)
+		{
+			return Vector2<T>(vec->x / scalar, vec->y / scalar);
+		}
 		template<typename TScalar = T> inline Vector2<T>& operator/=(TScalar scalar);
 
-		// Comparison operators
+		// -----------------------------------------
+		// COMPARASON
+		// -----------------------------------------
 		inline bool operator==(const Vector2<T> &other);
 		inline bool operator!=(const Vector2<T> &other);
 
 		inline T & operator[](int index);
 		inline T operator[](int index) const;
 
-		inline std::ostream& operator<<(std::ostream& os, const Vector2& vector);
+		inline std::ostream& operator<<(std::ostream& os);
 
 		// Static Vector functions
-		static Vector2<T> normalize(const Vector2<T> &vec);
+		static Vector2<T> normalize(Vector2<T> &vec);
 	};
 
 }
