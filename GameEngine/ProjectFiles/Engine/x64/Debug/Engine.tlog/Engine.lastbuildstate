@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=v4.0:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=8.1
-Debug|x64|C:\Users\Ryan\Desktop\C++ Projects\RyansEngine\GameEngine\ProjectFiles\FirstGame\|
+#TargetFrameworkVersion=v4.0:PlatformToolSet=v141:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.16299.0
+Debug|x64|D:\Coding Projects\C++\RyansEngine\GameEngine\ProjectFiles\Engine\|

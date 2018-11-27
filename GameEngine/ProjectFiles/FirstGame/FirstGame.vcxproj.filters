@@ -2,10 +2,5 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="MainGameFile.cpp" />
-    <ClCompile Include="MyOpenGlWindow.cpp" />
-    <ClCompile Include="MyOpenGlWindow_moc.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MyOpenGlWindow.h" />
   </ItemGroup>
 </Project>

@@ -73,10 +73,6 @@ void MyOpenGlWindow::paintGL()
 	
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-	//text rendering not working
-	renderText(10, 10, 0, QString("Hello"), QFont("Arial", 12, QFont::Bold, false));
-
-
 }
 
 
