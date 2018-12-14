@@ -1,32 +1,36 @@
 #ifndef ENGINE_ENGINE_CORE
 #define ENGINE_ENGINE_CORE
 
-#define WINDOW_WIDTH  600
-#define WINDOW_HEIGHT 480
-
 #include <vector>
 #include <unordered_map>
+
+// ==============================
+// Define Export Macros
+// ==============================
+#ifdef EXPORT_DLL
+#  define EXPORT __declspec(dllexport)
+#else
+#  define EXPORT __declspec(dllimport)
+#endif
+
+#define WINDOW_WIDTH  600
+#define WINDOW_HEIGHT 480
 
 // ==============================
 // Forward Declarations
 // ==============================
 class GLFWwindow;
-
-namespace Timing {
-	class Clock;
-}
-namespace Objects {
-	class GameObject;
-}
+namespace Timing { class Clock; }
+namespace Objects { class GameObject; }
 // ==============================
 
 class Engine
 {
 public:
-	Engine();
-	~Engine();
+	EXPORT Engine();
+	EXPORT ~Engine();
 
-	void Init();
+	EXPORT void Init();
 	void AddToGame(Objects::GameObject obj);
 
 	static void errorCallback(int error, const char *description);

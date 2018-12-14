@@ -1,13 +1,11 @@
 #include <Windows.h>
+#include <stdlib.h>
 
+#include "Engine.h"
 
 int main(int argc, char* argv[])
 {
-	//GLFWwindow *window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-
-	//while (!glfwWindowShouldClose(window))
-	//{
-
-	//}
+	Engine GEngine = Engine();
+	GEngine.Init();
 	return 1;
 }

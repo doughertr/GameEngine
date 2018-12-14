@@ -1,5 +1,5 @@
-#include <gl/glew.h>
-#include <GLFW/glfw3.h>
+#include <gl\glew.h>
+#include <GLFW\glfw3.h>
 #include <iostream>
 
 #include "Engine.h"
@@ -38,9 +38,20 @@ void Engine::tick()
 {
 	while (!glfwWindowShouldClose(m_gameWindow))
 	{
+		// Increment game clock
 		m_gameClock->newFrame();
 
+		float ratio;
+		int width, height;
 
+		glfwGetFramebufferSize(m_gameWindow, &width, &height);
+		ratio = width / height;
+
+		glViewport(0, 0, width, height);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glfwSwapBuffers(m_gameWindow);
+		glfwPollEvents();
 	}
 }
 
@@ -103,6 +114,7 @@ void Engine::initGameClock()
 	if (!m_gameClock->init())
 	{
 		cout << "Error: Could not initialize game clock" << endl;
+
 		exit(1);
 	}
 }
@@ -115,6 +127,14 @@ void Engine::initGameWindow()
 		std::cerr << "Error: Could not initialize GLFW library" << std::endl;
 		exit(1);
 	}
+
+	//int majorVersionNum, minorVersionNum;
+	//glGetIntegerv(GL_MAJOR_VERSION, &majorVersionNum);
+	//glGetIntegerv(GL_MINOR_VERSION, &minorVersionNum);
+	//std::cout << "Major version: " << majorVersionNum << " | Minor version: " << minorVersionNum << endl;
+
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 
 	// Create and initialize game window
 	m_gameWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Ryan's Engine", NULL, NULL);
