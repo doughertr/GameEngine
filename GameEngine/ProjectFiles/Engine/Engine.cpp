@@ -28,9 +28,12 @@ Engine::~Engine()
 
 void Engine::Init()
 {
+	initGL();
+
 	initGameClock();
 	initGameWindow();
-	initGL();
+
+	// Start game loop
 	tick();
 }
 
@@ -121,20 +124,6 @@ void Engine::initGameClock()
 
 void Engine::initGameWindow()
 {
-	glfwSetErrorCallback(errorCallback);
-	if (!glfwInit())
-	{
-		std::cerr << "Error: Could not initialize GLFW library" << std::endl;
-		exit(1);
-	}
-
-	//int majorVersionNum, minorVersionNum;
-	//glGetIntegerv(GL_MAJOR_VERSION, &majorVersionNum);
-	//glGetIntegerv(GL_MINOR_VERSION, &minorVersionNum);
-	//std::cout << "Major version: " << majorVersionNum << " | Minor version: " << minorVersionNum << endl;
-
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 
 	// Create and initialize game window
 	m_gameWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Ryan's Engine", NULL, NULL);
@@ -161,8 +150,12 @@ void Engine::initGL()
 	{
 		std::cerr << "Error: Could not initialize GLEW" << std::endl;
 	}
-
-
+	glfwSetErrorCallback(errorCallback);
+	if (!glfwInit())
+	{
+		std::cerr << "Error: Could not initialize GLFW library" << std::endl;
+		exit(1);
+	}
 }
 
 void Engine::errorCallback(int error, const char * description)

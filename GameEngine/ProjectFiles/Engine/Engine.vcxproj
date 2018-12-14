@@ -31,6 +31,7 @@
     <ClInclude Include="Debug Tools\Profiling\Profiler.h" />
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Timing\Clock.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\Matrix2.inl" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Visuals\Mesh.cpp" />
     <ClCompile Include="Objects\GameObject.cpp" />
     <ClCompile Include="Timing\Clock.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{51F5DA7A-FA1D-4C65-B382-54FBA8A031E8}</ProjectGuid>

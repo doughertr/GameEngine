@@ -21,6 +21,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Objects\GameObject.h" />
     <ClInclude Include="Visuals\Mesh.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\Vector2.inl" />
@@ -36,5 +37,6 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Objects\GameObject.cpp" />
     <ClCompile Include="Visuals\Mesh.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
 </Project>

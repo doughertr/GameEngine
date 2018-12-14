@@ -24,7 +24,7 @@ namespace Timing { class Clock; }
 namespace Objects { class GameObject; }
 // ==============================
 
-class Engine
+EXPORT class Engine
 {
 public:
 	EXPORT Engine();
